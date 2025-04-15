@@ -47,7 +47,7 @@ public class login extends AppCompatActivity {
 
                 // Configuration de Retrofit
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2/api/") // Ajout du port et s'assurer que l'URL se termine par un slash
+                        .baseUrl("http://10.0.220.186/api/") // Ajout du port et s'assurer que l'URL se termine par un slash
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
