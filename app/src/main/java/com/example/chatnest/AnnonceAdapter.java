@@ -1,5 +1,9 @@
 package com.example.chatnest;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +42,9 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         holder.tvAdresse.setText("Adresse : " + announcement.getVille());
         //holder.tvNomAgent.setText("Ajouté par : " + announcement.getNomAgent());
         holder.btnContacter.setOnClickListener(v -> {
-            // Action à déclencher
+            Context context = holder.itemView.getContext();
+            Intent intent = new Intent(context, Messagerie.class);
+            context.startActivity(intent);
         });
     }
 

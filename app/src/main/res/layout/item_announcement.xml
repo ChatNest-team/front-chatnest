@@ -18,12 +18,13 @@
         app:layout_constraintEnd_toEndOf="parent">
 
 
+
         <ImageView
             android:id="@+id/idivPoster"
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background" />
+            android:src="@drawable/house" />
 
         <TextView
             android:id="@+id/idtvTitreAnnonce"
