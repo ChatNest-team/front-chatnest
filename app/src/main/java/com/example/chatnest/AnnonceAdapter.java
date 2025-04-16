@@ -39,11 +39,12 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         //holder.ivPoster.setImageAlpha(announcement.getPoster());
         holder.tvTitreAnnonce.setText("Titre : " + announcement.getNom());
         holder.tvPrix.setText(String.format("Prix : %.2f €", announcement.getPrixPropriete()));
-        holder.tvAdresse.setText("Adresse : " + announcement.getVille());
-        //holder.tvNomAgent.setText("Ajouté par : " + announcement.getNomAgent());
+        holder.tvAdresse.setText("Adresse : " + announcement.getAdresse());
+        holder.tvNomAgent.setText("Ajouté par : " + announcement.getNomAgent());
         holder.btnContacter.setOnClickListener(v -> {
             Context context = holder.itemView.getContext();
             Intent intent = new Intent(context, Messagerie.class);
+            intent.putExtra("idAgent", announcement.getIdAgent()+"");
             context.startActivity(intent);
         });
     }
@@ -56,7 +57,6 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
     public static class AnnonceViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitreAnnonce;
         TextView tvPrix;
-
         ImageView ivPoster;
         TextView tvAdresse;
         TextView tvNomAgent;

@@ -3,6 +3,7 @@ package com.example.chatnest;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -12,18 +13,20 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
-    private List<Message> messageList;  // Remarquer l'utilisation de ta classe Message
+    private List<Message> messageList;
 
     public MessageAdapter(List<Message> messages) {
         this.messageList = messages;
     }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-        TextView messageText;
+        TextView message;
+        Button btnEnvoyer;
 
         public MessageViewHolder(View itemView) {
             super(itemView);
-            messageText = itemView.findViewById(R.id.messageText);
+            message = itemView.findViewById(R.id.etMessage);
+            btnEnvoyer = itemView.findViewById(R.id.btnEnvoyer);
         }
     }
 
@@ -38,8 +41,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     @Override
     public void onBindViewHolder(@NonNull MessageViewHolder holder, int position) {
         Message msg = messageList.get(position);
-        holder.messageText.setText(msg.getTexte());
-        // Logique pour alignement et fond
+        holder.message.setText(msg.getTexte());
+
+
+        holder.btnEnvoyer.setOnClickListener(v->{
+
+        });
+
     }
 
     @Override

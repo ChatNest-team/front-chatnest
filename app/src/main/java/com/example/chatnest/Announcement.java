@@ -36,7 +36,7 @@ public class Announcement {
     @SerializedName("Ville")
     private String ville;
 
-    @SerializedName("Adresse")
+    @SerializedName("adresse")
     private String adresse;
 
     @SerializedName("CodePostal")
@@ -50,6 +50,15 @@ public class Announcement {
 
     @SerializedName("Nombre_Piece")
     private int nombrePiece;
+
+    @SerializedName("Nom_Agent")
+    private String nomAgent;
+
+    @SerializedName("Prenom_Agent")
+    private String prenomAgent;
+
+    @SerializedName("id_agent")
+    private int idAgent;
 
     public int getIdPropriete() {
         return idPropriete;
@@ -169,6 +178,30 @@ public class Announcement {
 
     public void setNombrePiece(int nombrePiece) {
         this.nombrePiece = nombrePiece;
+    }
+
+    public String getNomAgent() {
+        return nomAgent;
+    }
+
+    public void setNomAgent(String nomAgent) {
+        this.nomAgent = nomAgent;
+    }
+
+    public String getPrenomAgent() {
+        return prenomAgent;
+    }
+
+    public void setPrenomAgent(String prenomAgent) {
+        this.prenomAgent = prenomAgent;
+    }
+
+    public int getIdAgent() {
+        return idAgent;
+    }
+
+    public void setIdAgent(int idAgent) {
+        this.idAgent = idAgent;
     }
 }
 

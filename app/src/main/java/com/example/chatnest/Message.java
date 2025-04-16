@@ -16,5 +16,13 @@ public class Message {
     public boolean isFromMe() {
         return isFromMe;
     }
+
+    public void setTexte(String texte) {
+        this.texte = texte;
+    }
+
+    public void setFromMe(boolean fromMe) {
+        isFromMe = fromMe;
+    }
 }
 

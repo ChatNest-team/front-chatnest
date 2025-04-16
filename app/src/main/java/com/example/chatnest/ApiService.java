@@ -15,5 +15,8 @@ public interface ApiService {
 
     @GET("announcements")
     Call<List<Announcement>> getAnnouncements();
+
+
+
 }
 

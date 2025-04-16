@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,6 +59,7 @@ public class Home extends AppCompatActivity {
                     annonces = response.body();
                     annonceAdapter = new AnnonceAdapter(annonces);
                     recyclerView.setAdapter(annonceAdapter);
+                    Gson gson = new GsonBuilder().setPrettyPrinting().create();
                     Log.d("API_ANNONCES", new Gson().toJson(annonces));
 
                     Toast.makeText(Home.this, "Nombre d'annonces : " + annonces.size(), Toast.LENGTH_SHORT).show();
