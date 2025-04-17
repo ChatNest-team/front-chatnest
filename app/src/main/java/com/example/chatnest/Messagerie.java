@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,9 +37,13 @@ public class Messagerie extends AppCompatActivity {
             return insets;
         });
 
+        EditText messageText=findViewById(R.id.etMessage);
+        String textMessage = messageText.getText().toString();
 
         String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
         String idClient = getIntent().getStringExtra("idClient");
+
+
         if (idAgentStr != null) {
             try {
                 idAgent = Integer.parseInt(idAgentStr);
@@ -57,8 +63,10 @@ public class Messagerie extends AppCompatActivity {
         send = findViewById(R.id.btnEnvoyer);
 
         send.setOnClickListener(v -> {
-            Log.d(TAG, "ID agent : " + idAgent);
-            Log.d(TAG, "ID client :" + idClient);
+            Log.d(TAG, "route :" + idClient +"/"+idAgent+"/"+textMessage);
+
+            //MessageRequest messageRequest = new MessageRequest(idClient,idAgent,)
+
         });
     }
 }

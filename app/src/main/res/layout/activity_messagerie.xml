@@ -10,15 +10,17 @@
     tools:context=".Messagerie">
 
     <!-- Profil Agent -->
+
     <ImageView
         android:id="@+id/ivAgentPhoto"
         android:layout_width="80dp"
         android:layout_height="80dp"
-        android:src="@drawable/ic_agent_default"
-        android:scaleType="centerCrop"
+        android:layout_marginTop="44dp"
         android:background="@drawable/circle_background"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_agent_default"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tvNomAgent"

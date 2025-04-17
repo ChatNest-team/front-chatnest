@@ -26,7 +26,7 @@
             android:exported="false" />
         <activity
             android:name=".Home"
-            android:exported="true" /> <!-- Modifié ici pour être exportée -->
+            android:exported="true" />
         <activity
             android:name=".login"
             android:exported="false" />
