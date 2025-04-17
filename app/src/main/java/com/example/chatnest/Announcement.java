@@ -60,6 +60,9 @@ public class Announcement {
     @SerializedName("id_agent")
     private int idAgent;
 
+    @SerializedName("id_user")
+    private int idUser;
+
     public int getIdPropriete() {
         return idPropriete;
     }
@@ -202,6 +205,14 @@ public class Announcement {
 
     public void setIdAgent(int idAgent) {
         this.idAgent = idAgent;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 }
 

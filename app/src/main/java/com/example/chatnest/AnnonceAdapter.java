@@ -4,6 +4,8 @@ import static androidx.core.content.ContextCompat.startActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +45,14 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         holder.tvNomAgent.setText("Ajouté par : " + announcement.getNomAgent());
         holder.btnContacter.setOnClickListener(v -> {
             Context context = holder.itemView.getContext();
+            SharedPreferences sharedPreferences = context.getSharedPreferences("MySession", Context.MODE_PRIVATE);
+            String userId = sharedPreferences.getString("id", null);
+
             Intent intent = new Intent(context, Messagerie.class);
-            intent.putExtra("idAgent", announcement.getIdAgent()+"");
+            intent.putExtra("idAgent", String.valueOf(announcement.getIdAgent()));
+            intent.putExtra("idClient", userId);
+
+
             context.startActivity(intent);
         });
     }

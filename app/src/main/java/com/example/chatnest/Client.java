@@ -2,10 +2,67 @@ package com.example.chatnest;
 
 // com.example.chatnest.Client.java
 public class Client {
-    public int ID_Personne;
-    public String Revenu_annuel;
-    public String Langue_preferee;
-    public String Statut;
-    public String role;
-    public Personne personne;
+    public int id;
+    public String Nom;
+    public String Prenom;
+    public String Email;
+    public String Parrain_Nom;
+    public String Parrain_Prenom;
+    public String Tél;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getNom() {
+        return Nom;
+    }
+
+    public void setNom(String nom) {
+        Nom = nom;
+    }
+
+    public String getPrenom() {
+        return Prenom;
+    }
+
+    public void setPrenom(String prenom) {
+        Prenom = prenom;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    public String getParrain_Nom() {
+        return Parrain_Nom;
+    }
+
+    public void setParrain_Nom(String parrain_Nom) {
+        Parrain_Nom = parrain_Nom;
+    }
+
+    public String getParrain_Prenom() {
+        return Parrain_Prenom;
+    }
+
+    public void setParrain_Prenom(String parrain_Prenom) {
+        Parrain_Prenom = parrain_Prenom;
+    }
+
+    public String getTél() {
+        return Tél;
+    }
+
+    public void setTél(String tél) {
+        Tél = tél;
+    }
 }
