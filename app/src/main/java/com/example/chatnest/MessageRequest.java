@@ -7,7 +7,7 @@ public class MessageRequest {
     private String Statut;
     private String envoyeur;
     private int id_plateforme;
-    private int id_Messagerie;
+    //private int id_Messagerie;
 
     public Integer getId_client() {
         return id_client;
@@ -57,11 +57,5 @@ public class MessageRequest {
         this.id_plateforme = id_plateforme;
     }
 
-    public int getId_Messagerie() {
-        return id_Messagerie;
-    }
 
-    public void setId_Messagerie(int id_Messagerie) {
-        this.id_Messagerie = id_Messagerie;
-    }
 }
