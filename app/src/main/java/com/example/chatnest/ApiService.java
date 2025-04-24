@@ -23,6 +23,12 @@ public interface ApiService {
             @Path("id_agent") int idAgent,
             @Body MessageRequest messageRequest);
 
+    @GET("messages/{id_client}/{id_agent}")
+    Call<List<Message>> getMessages(
+            @Path("id_client") int idClient,
+            @Path("id_agent") int idAgent
+    );
+
 
 
 }

@@ -71,14 +71,13 @@ public class login extends AppCompatActivity {
                             if (auth.client != null) {
                                 messageText.setText(auth.message + "\nBienvenue ");
                                 messageText.setTextColor(Color.GREEN);
-
                                 SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("id", String.valueOf(auth.client.id));
                                 editor.apply();
                                 Log.d("Login", "ID client récupéré : " + auth.client.id);
 
-                                // Créer un Intent pour aller vers l'activité Home
+
                                 Intent intent = new Intent(login.this, Home.class);
                                 startActivity(intent);
                                 finish();

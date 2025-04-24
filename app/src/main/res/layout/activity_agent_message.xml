@@ -32,7 +32,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:clipToPadding="false"
-        tools:listitem="@layout/item_message"/>
+        tools:listitem="@layout/item_message_send"/>
 
     <!-- Champ de saisie et bouton envoyer -->
     <LinearLayout
