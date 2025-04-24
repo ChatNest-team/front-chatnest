@@ -1,14 +1,19 @@
 package com.example.chatnest;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,12 +41,44 @@ public class Home extends AppCompatActivity {
         recyclerView = findViewById(R.id.recyclerAnnonces);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        // Initialiser la navigation
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_home) {
+                    Toast.makeText(Home.this, "Accueil", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Home.this,Home.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_profil) {
+                    Toast.makeText(Home.this, "Profil", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Home.this,Visites.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_messages) {
+                    Toast.makeText(Home.this, "Messages", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Home.this,Visites.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_visite) {
+                    Toast.makeText(Home.this, "Visites", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Home.this,Visites.class);
+                    startActivity(intent);
+                    return true;
+                } else {
+                    return false;
+                }
+
+            }
+        });
+
         // Appel de la requête API pour récupérer les annonces
         makeApiRequest();
     }
 
     private void makeApiRequest() {
-        // Initialiser Retrofit
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -49,7 +86,6 @@ public class Home extends AppCompatActivity {
 
         ApiService apiService = retrofit.create(ApiService.class);
 
-        // Appel de l'API pour récupérer une liste d'annonces
         Call<List<Announcement>> call = apiService.getAnnouncements();
 
         call.enqueue(new Callback<List<Announcement>>() {
@@ -60,8 +96,7 @@ public class Home extends AppCompatActivity {
                     annonceAdapter = new AnnonceAdapter(annonces);
                     recyclerView.setAdapter(annonceAdapter);
                     Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                    Log.d("API_ANNONCES", new Gson().toJson(annonces));
-
+                    Log.d("API_ANNONCES", gson.toJson(annonces));
                     Toast.makeText(Home.this, "Nombre d'annonces : " + annonces.size(), Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(Home.this, "Erreur lors de la récupération des annonces", Toast.LENGTH_SHORT).show();

@@ -15,12 +15,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Chatnest"
         android:usesCleartextTraffic="true"
-
         tools:targetApi="31">
+        <activity
+            android:name=".Visites"
+            android:exported="false" />
         <activity
             android:name=".Messagerie"
             android:exported="false"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".AgentMessage"
             android:exported="false" />
