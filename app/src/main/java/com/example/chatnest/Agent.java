@@ -9,13 +9,16 @@ public class Agent {
     public String photo;
     public String performance;
 
-    public Agent(int id, String nom, String prenom, String email, String photo, String performance) {
+    public String role;
+
+    public Agent(int id, String nom, String prenom, String email, String photo, String performance, String role) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.email = email;
         this.photo = photo;
         this.performance = performance;
+        this.role = role;
     }
 
     public int getId() {
@@ -64,5 +67,13 @@ public class Agent {
 
     public void setPerformance(String performance) {
         this.performance = performance;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

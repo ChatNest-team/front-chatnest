@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.navigation.NavigationView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -59,7 +58,7 @@ public class Home extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_messages) {
                     Toast.makeText(Home.this, "Messages", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Home.this,Visites.class);
+                    Intent intent = new Intent(Home.this, Messagelist.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_visite) {

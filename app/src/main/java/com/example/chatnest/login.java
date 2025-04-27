@@ -81,8 +81,9 @@ public class login extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("id", String.valueOf(auth.client.id));
+                                editor.putString("role", String.valueOf(auth.client.role));
                                 editor.apply();
-                                Log.d("Login", "ID client récupéré : " + auth.client.id);
+                                Log.d("Login", "role : " + auth.client.role);
 
 
                                 Intent intent = new Intent(login.this, Home.class);

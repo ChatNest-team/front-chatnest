@@ -82,14 +82,14 @@ public class LogAgent extends AppCompatActivity {
 
                 Map<String, String> requestBody = new HashMap<>();
                 requestBody.put("licence", licence);
-                Log.d("Login", "Requête envoyée: " + requestBody);
+                //Log.d("Login", "Requête envoyée: " + requestBody);
 
                 // Appel de l'API
                 Call<AuthAgent> call = apiService.loginAgent(requestBody);
                 call.enqueue(new Callback<AuthAgent>() {
                     @Override
                     public void onResponse(Call<AuthAgent> call, Response<AuthAgent> response) {
-                        Log.d("Login", "Code réponse: " + response.code());
+                        //Log.d("Login", "Code réponse: " + response.code());
 
                         // Masquer la ProgressBar après la réponse
                         progressBar.setVisibility(View.GONE);
@@ -103,8 +103,9 @@ public class LogAgent extends AppCompatActivity {
                                 SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("id", String.valueOf(auth.agent.id));
+                                editor.putString("role", String.valueOf(auth.agent.role));
                                 editor.apply();
-                                Log.d("Login", "ID agent récupéré : " + auth.agent.id);
+                                //Log.d("Login", "role : " + auth.agent.role);
 
                                 Intent intent = new Intent(LogAgent.this, Home.class);
                                 startActivity(intent);
@@ -114,7 +115,7 @@ public class LogAgent extends AppCompatActivity {
                                 messageText.setTextColor(Color.RED);
                             }
                         } else {
-                            Log.e("Login", "Échec de l'authentification, réponse échouée");
+                            //Log.e("Login", "Échec de l'authentification, réponse échouée");
                             messageText.setText("Échec de l'authentification: " + response.code());
                             messageText.setTextColor(Color.RED);
                         }
@@ -123,7 +124,7 @@ public class LogAgent extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<AuthAgent> call, Throwable t) {
-                        Log.e("Login", "Erreur dans l'appel API: " + t.getMessage(), t);
+                        //Log.e("Login", "Erreur dans l'appel API: " + t.getMessage(), t);
 
                         // Masquer la ProgressBar en cas d'échec
                         progressBar.setVisibility(View.GONE);

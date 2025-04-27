@@ -82,6 +82,18 @@
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"/>
 
+        <Button
+            android:id="@+id/idbtnOrganiser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Organiser une visite"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_send"
+            android:layout_marginTop="10dp"
+            android:visibility="gone"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"/>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

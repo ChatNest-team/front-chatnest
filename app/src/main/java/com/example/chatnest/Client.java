@@ -10,6 +10,19 @@ public class Client {
     public String Parrain_Prenom;
     public String Tél;
 
+    public String role;
+
+    public Client(int id, String nom, String prenom, String email, String parrain_Nom, String parrain_Prenom, String tél, String role) {
+        this.id = id;
+        Nom = nom;
+        Prenom = prenom;
+        Email = email;
+        Parrain_Nom = parrain_Nom;
+        Parrain_Prenom = parrain_Prenom;
+        Tél = tél;
+        this.role = role;
+    }
+
     public int getId() {
         return id;
     }
@@ -64,5 +77,13 @@ public class Client {
 
     public void setTél(String tél) {
         Tél = tél;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

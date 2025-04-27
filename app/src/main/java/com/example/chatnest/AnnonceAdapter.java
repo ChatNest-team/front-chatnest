@@ -1,7 +1,5 @@
 package com.example.chatnest;
 
-import static androidx.core.content.ContextCompat.startActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -36,23 +34,29 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
 
     @Override
     public void onBindViewHolder(@NonNull AnnonceViewHolder holder, int position) {
-
         Announcement announcement = announcementList.get(position);
-        //holder.ivPoster.setImageAlpha(announcement.getPoster());
+
+        Context context = holder.itemView.getContext();
+        SharedPreferences sharedPreferences = context.getSharedPreferences("MySession", Context.MODE_PRIVATE);
+        String userRole = sharedPreferences.getString("role", "client");
+        Log.d("AnnonceAdapter", "Rôle de l'utilisateur : " + userRole);
         holder.tvTitreAnnonce.setText("Titre : " + announcement.getNom());
         holder.tvPrix.setText(String.format("Prix : %.2f €", announcement.getPrixPropriete()));
         holder.tvAdresse.setText("Adresse : " + announcement.getAdresse());
         holder.tvNomAgent.setText("Ajouté par : " + announcement.getNomAgent());
-        holder.btnContacter.setOnClickListener(v -> {
-            Context context = holder.itemView.getContext();
-            SharedPreferences sharedPreferences = context.getSharedPreferences("MySession", Context.MODE_PRIVATE);
-            String userId = sharedPreferences.getString("id", null);
 
+        // Montrer ou cacher le bouton "Contacter"
+        if ("agent".equals(userRole)) {
+            holder.btnContacter.setVisibility(View.GONE);
+        } else {
+            holder.btnContacter.setVisibility(View.VISIBLE);
+        }
+
+        holder.btnContacter.setOnClickListener(v -> {
+            String userId = sharedPreferences.getString("id", null);
             Intent intent = new Intent(context, Messagerie.class);
             intent.putExtra("idAgent", String.valueOf(announcement.getIdAgent()));
             intent.putExtra("idClient", userId);
-
-
             context.startActivity(intent);
         });
     }
@@ -74,7 +78,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
             super(itemView);
             //ivPoster = itemView.findViewById(R.id.idivPoster);
             tvTitreAnnonce = itemView.findViewById(R.id.idtvTitreAnnonce);
-            tvPrix = itemView.findViewById(R.id.idtvPrix); // Assure-toi que cet ID existe bien dans le XML
+            tvPrix = itemView.findViewById(R.id.idtvPrix);
             tvAdresse = itemView.findViewById(R.id.idtvAdresse);
             tvNomAgent = itemView.findViewById(R.id.tvNomAgent);
             btnContacter = itemView.findViewById(R.id.idbtnContacter);
