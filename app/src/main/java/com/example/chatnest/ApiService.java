@@ -39,6 +39,14 @@ public interface ApiService {
             @Path("id_agent") int idAgent
     );
 
+    @POST("visites/create/{id_agent}/{id_client}/{id_propriete}")
+    Call<Void> visitesSend(
+            @Path("id_agent") int idAgent,
+            @Path("id_client") int idClient,
+            @Path("id_propriete") int idPropriete
+    );
+
+
 
 
 }

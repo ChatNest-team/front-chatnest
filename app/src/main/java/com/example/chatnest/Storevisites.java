@@ -44,6 +44,20 @@ public class Storevisites extends AppCompatActivity {
         Button btnSubmitVisite = findViewById(R.id.btnSubmitVisite);
 
         btnSubmitVisite.setOnClickListener(v->{
+            String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
+            Log.d("Storevisites", "ID Agent récupéré : " + idAgentStr);
+
+            if (idAgentStr != null) {
+                try {
+                    idAgent = Integer.parseInt(idAgentStr);
+                } catch (NumberFormatException e) {
+                    Log.e("Erreur de conversion de l'ID agent", e.getMessage());
+                    idAgent = -1;
+                }
+            } else {
+                Log.e("ID agent non fourni", "L'ID de l'agent est manquant.");
+                idAgent = -1;
+            }
 
         });
     }
@@ -113,7 +127,8 @@ public class Storevisites extends AppCompatActivity {
                                 @Override
                                 public void onClick(View v) {
                                     // Récupérer l'ID du client
-                                    int clientId = client.getId();  // Assurez-vous que votre modèle Client a cette méthode
+                                    int clientId = client.getId();
+
 
                                     // Afficher l'ID du client dans les logs
                                     Log.d("Storevisites", "ID du client cliqué : " + clientId);
