@@ -81,18 +81,16 @@
             android:layout_marginTop="10dp"
             android:paddingHorizontal="20dp"
             android:paddingVertical="10dp"/>
-
-        <Button
-            android:id="@+id/idbtnOrganiser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Organiser une visite"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/bg_send"
+        <ImageView
+            android:id="@+id/idstorevisite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_marginTop="10dp"
-            android:visibility="gone"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="10dp"/>
+            android:src="@drawable/calendar"
+            android:contentDescription="@string/visite"
+            android:clickable="true"
+            android:focusable="true" />
+
 
     </LinearLayout>
 

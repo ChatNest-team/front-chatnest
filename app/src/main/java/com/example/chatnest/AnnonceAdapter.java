@@ -50,7 +50,21 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
             holder.btnContacter.setVisibility(View.GONE);
         } else {
             holder.btnContacter.setVisibility(View.VISIBLE);
+            holder.idstorevisite.setVisibility(View.GONE);
         }
+
+        holder.idstorevisite.setOnClickListener(v->{
+            String agentId = sharedPreferences.getString("id", null);
+            String announcementId = String.valueOf(announcement.getIdPropriete());
+            if (agentId != null) {
+                Intent intent = new Intent(context, Storevisites.class);
+                intent.putExtra("idAgent", agentId);
+                intent.putExtra("idPropriete", announcementId);
+                context.startActivity(intent); // Lancer l'activité
+            } else {
+                Log.e("AnnonceAdapter", "Agent ID est null !");
+            }
+        });
 
         holder.btnContacter.setOnClickListener(v -> {
             String userId = sharedPreferences.getString("id", null);
@@ -58,6 +72,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
             intent.putExtra("idAgent", String.valueOf(announcement.getIdAgent()));
             intent.putExtra("idClient", userId);
             context.startActivity(intent);
+
         });
     }
 
@@ -73,6 +88,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         TextView tvAdresse;
         TextView tvNomAgent;
         Button btnContacter;
+        ImageView idstorevisite;
 
         public AnnonceViewHolder(View itemView) {
             super(itemView);
@@ -82,6 +98,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
             tvAdresse = itemView.findViewById(R.id.idtvAdresse);
             tvNomAgent = itemView.findViewById(R.id.tvNomAgent);
             btnContacter = itemView.findViewById(R.id.idbtnContacter);
+            idstorevisite = itemView.findViewById(R.id.idstorevisite);
         }
     }
 }

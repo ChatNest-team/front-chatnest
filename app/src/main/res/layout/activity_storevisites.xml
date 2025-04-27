@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:gravity="center">
+
+    <!-- Titre du formulaire -->
+    <TextView
+        android:id="@+id/CreateVisiteTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Créer une Visite"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Champ Date de Visite -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Date de la Visite"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/DateVisite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:hint="jj/mm/aaaa"
+        android:importantForAccessibility="yes"
+        android:contentDescription="@string/date_visite"/>
+
+    <!-- Champ Heure de Visite -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Heure de la Visite"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/HeureVisite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="time"
+        android:hint="hh:mm"
+        android:importantForAccessibility="yes"
+        android:contentDescription="@string/heure_visite"/>
+
+    <!-- Affichage horizontal des clients sous forme de bulles -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clients"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <LinearLayout
+        android:id="@+id/lClients"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:scrollbars="horizontal"
+        android:gravity="start|center_vertical">
+
+        <!-- Ce conteneur contiendra dynamiquement les vues des clients -->
+
+    </LinearLayout>
+
+    <!-- Bouton de Soumission -->
+    <Button
+        android:id="@+id/btnSubmitVisite"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Soumettre"
+        android:layout_marginTop="24dp"/>
+</LinearLayout>

@@ -34,6 +34,11 @@ public interface ApiService {
             @Path("id_agent") int idAgent
     );
 
+    @GET("clients/{id_agent}")
+    Call<List<Client>> getClients(
+            @Path("id_agent") int idAgent
+    );
+
 
 
 }

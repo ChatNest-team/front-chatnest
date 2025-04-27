@@ -9,18 +9,23 @@ public class Client {
     public String Parrain_Nom;
     public String Parrain_Prenom;
     public String Tél;
+    public String Image;
 
     public String role;
 
-    public Client(int id, String nom, String prenom, String email, String parrain_Nom, String parrain_Prenom, String tél, String role) {
-        this.id = id;
-        Nom = nom;
-        Prenom = prenom;
-        Email = email;
-        Parrain_Nom = parrain_Nom;
-        Parrain_Prenom = parrain_Prenom;
-        Tél = tél;
+   public int id_parrain;
+
+    public Client(int id_parrain, String role, String image, String tél, String parrain_Prenom, String parrain_Nom, String email, String prenom, String nom, int id) {
+        this.id_parrain = id_parrain;
         this.role = role;
+        Image = image;
+        Tél = tél;
+        Parrain_Prenom = parrain_Prenom;
+        Parrain_Nom = parrain_Nom;
+        Email = email;
+        Prenom = prenom;
+        Nom = nom;
+        this.id = id;
     }
 
     public int getId() {
@@ -79,11 +84,27 @@ public class Client {
         Tél = tél;
     }
 
+    public String getImage() {
+        return Image;
+    }
+
+    public void setImage(String image) {
+        Image = image;
+    }
+
     public String getRole() {
         return role;
     }
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public int getId_parrain() {
+        return id_parrain;
+    }
+
+    public void setId_parrain(int id_parrain) {
+        this.id_parrain = id_parrain;
     }
 }

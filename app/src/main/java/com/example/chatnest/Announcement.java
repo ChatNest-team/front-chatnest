@@ -9,6 +9,7 @@ public class Announcement {
     @SerializedName("ID_Propriete")
     private int idPropriete;
 
+
     @SerializedName("Nom")
     private String nom;
 
@@ -63,140 +64,34 @@ public class Announcement {
     @SerializedName("id_user")
     private int idUser;
 
-    public int getIdPropriete() {
-        return idPropriete;
-    }
-
-    public void setIdPropriete(int idPropriete) {
+    public Announcement(int idPropriete, String nom, double prixPropriete, String dimension, String description, boolean piscine, boolean meuble, boolean jardin, String poster, String ville, String adresse, int codePostal, String region, String statut, int nombrePiece, String nomAgent, String prenomAgent, int idAgent, int idUser) {
         this.idPropriete = idPropriete;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
         this.nom = nom;
-    }
-
-    public double getPrixPropriete() {
-        return prixPropriete;
-    }
-
-    public void setPrixPropriete(double prixPropriete) {
         this.prixPropriete = prixPropriete;
-    }
-
-    public String getDimension() {
-        return dimension;
-    }
-
-    public void setDimension(String dimension) {
         this.dimension = dimension;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isPiscine() {
-        return piscine;
-    }
-
-    public void setPiscine(boolean piscine) {
         this.piscine = piscine;
-    }
-
-    public boolean isMeuble() {
-        return meuble;
-    }
-
-    public void setMeuble(boolean meuble) {
         this.meuble = meuble;
-    }
-
-    public boolean isJardin() {
-        return jardin;
-    }
-
-    public void setJardin(boolean jardin) {
         this.jardin = jardin;
-    }
-
-    public String getPoster() {
-        return poster;
-    }
-
-    public void setPoster(String poster) {
         this.poster = poster;
-    }
-
-    public String getVille() {
-        return ville;
-    }
-
-    public void setVille(String ville) {
         this.ville = ville;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
         this.adresse = adresse;
-    }
-
-    public int getCodePostal() {
-        return codePostal;
-    }
-
-    public void setCodePostal(int codePostal) {
         this.codePostal = codePostal;
-    }
-
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
         this.region = region;
-    }
-
-    public String getStatut() {
-        return statut;
-    }
-
-    public void setStatut(String statut) {
         this.statut = statut;
-    }
-
-    public int getNombrePiece() {
-        return nombrePiece;
-    }
-
-    public void setNombrePiece(int nombrePiece) {
         this.nombrePiece = nombrePiece;
-    }
-
-    public String getNomAgent() {
-        return nomAgent;
-    }
-
-    public void setNomAgent(String nomAgent) {
         this.nomAgent = nomAgent;
-    }
-
-    public String getPrenomAgent() {
-        return prenomAgent;
-    }
-
-    public void setPrenomAgent(String prenomAgent) {
         this.prenomAgent = prenomAgent;
+        this.idAgent = idAgent;
+        this.idUser = idUser;
+    }
+
+    public int getIdUser() {
+        return idUser;
+    }
+
+    public void setIdUser(int idUser) {
+        this.idUser = idUser;
     }
 
     public int getIdAgent() {
@@ -207,12 +102,140 @@ public class Announcement {
         this.idAgent = idAgent;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public String getPrenomAgent() {
+        return prenomAgent;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setPrenomAgent(String prenomAgent) {
+        this.prenomAgent = prenomAgent;
+    }
+
+    public String getNomAgent() {
+        return nomAgent;
+    }
+
+    public void setNomAgent(String nomAgent) {
+        this.nomAgent = nomAgent;
+    }
+
+    public int getNombrePiece() {
+        return nombrePiece;
+    }
+
+    public void setNombrePiece(int nombrePiece) {
+        this.nombrePiece = nombrePiece;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public int getCodePostal() {
+        return codePostal;
+    }
+
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getVille() {
+        return ville;
+    }
+
+    public void setVille(String ville) {
+        this.ville = ville;
+    }
+
+    public String getPoster() {
+        return poster;
+    }
+
+    public void setPoster(String poster) {
+        this.poster = poster;
+    }
+
+    public boolean isJardin() {
+        return jardin;
+    }
+
+    public void setJardin(boolean jardin) {
+        this.jardin = jardin;
+    }
+
+    public boolean isMeuble() {
+        return meuble;
+    }
+
+    public void setMeuble(boolean meuble) {
+        this.meuble = meuble;
+    }
+
+    public boolean isPiscine() {
+        return piscine;
+    }
+
+    public void setPiscine(boolean piscine) {
+        this.piscine = piscine;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDimension() {
+        return dimension;
+    }
+
+    public void setDimension(String dimension) {
+        this.dimension = dimension;
+    }
+
+    public double getPrixPropriete() {
+        return prixPropriete;
+    }
+
+    public void setPrixPropriete(double prixPropriete) {
+        this.prixPropriete = prixPropriete;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
+    }
+
+    public int getIdPropriete() {
+        return idPropriete;
+    }
+
+    public void setIdPropriete(int idPropriete) {
+        this.idPropriete = idPropriete;
     }
 }
 
