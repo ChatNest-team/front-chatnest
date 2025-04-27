@@ -2,6 +2,7 @@ package com.example.chatnest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
@@ -13,6 +14,10 @@ import java.util.Map;
 public interface ApiService {
     @POST("login/client")
     Call<AuthResponse> loginClient(@Body Map<String, String> body);
+
+
+    @POST("agent-send")
+    Call<AuthAgent> loginAgent(@Body Map<String, String> body);
 
     @GET("announcements")
     Call<List<Announcement>> getAnnouncements();

@@ -28,6 +28,8 @@ public class login extends AppCompatActivity {
     private TextView messageText;
     private Button validateButton;
 
+    private TextView loginAgent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +38,11 @@ public class login extends AppCompatActivity {
         accessCodeInput = findViewById(R.id.accessCodeInput);
         messageText = findViewById(R.id.messageText);
         validateButton = findViewById(R.id.validateButton);
+        loginAgent = findViewById(R.id.hiddenLoginAgent);
+        loginAgent.setOnClickListener(v->{
+            Intent intent = new Intent(login.this, LogAgent.class);
+            startActivity(intent);
+        });
 
         validateButton.setOnClickListener(v -> {
             String code = accessCodeInput.getText().toString().trim();
