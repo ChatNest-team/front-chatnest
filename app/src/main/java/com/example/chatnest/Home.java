@@ -1,6 +1,7 @@
 package com.example.chatnest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -43,17 +44,17 @@ public class Home extends AppCompatActivity {
         // Initialiser la navigation
         BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
 
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener(){
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 if (item.getItemId() == R.id.nav_home) {
                     Toast.makeText(Home.this, "Accueil", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Home.this,Home.class);
+                    Intent intent = new Intent(Home.this, Home.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_profil) {
                     Toast.makeText(Home.this, "Profil", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Home.this,Visites.class);
+                    Intent intent = new Intent(Home.this, Visites.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_messages) {
@@ -62,14 +63,28 @@ public class Home extends AppCompatActivity {
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_visite) {
-                    Toast.makeText(Home.this, "Visites", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Home.this,Visites.class);
-                    startActivity(intent);
-                    return true;
-                } else {
-                    return false;
-                }
+                    // Récupération de l'ID de l'agent
+                    SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
+                    String idAgentStr = sharedPreferences.getString("id", null);
+                    if (idAgentStr != null) {
+                        try {
+                            int idAgent = Integer.parseInt(idAgentStr);
+                            Log.e("Visites", "ID agent : " + idAgent);
 
+                            // Passer l'ID agent à l'activité Visites
+                            Intent intent = new Intent(Home.this, Visites.class);
+                            intent.putExtra("idAgent", idAgent);
+                            startActivity(intent);
+                        } catch (NumberFormatException e) {
+                            Log.e("Visites", "ID agent invalide");
+                            Toast.makeText(Home.this, "Erreur de format d'ID agent", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Toast.makeText(Home.this, "Aucun ID d'agent trouvé", Toast.LENGTH_SHORT).show();
+                    }
+                    return true;
+                }
+                return false;
             }
         });
 

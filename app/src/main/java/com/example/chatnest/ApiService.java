@@ -48,6 +48,11 @@ public interface ApiService {
             @Body Map<String, String> body
     );
 
+    @GET("visites/{id_agent}")
+    Call<List<Visite>> getVisites(
+            @Path("id_agent") int idAgent
+    );
+
 
 
 
