@@ -53,6 +53,10 @@ public interface ApiService {
             @Path("id_agent") int idAgent
     );
 
+    @GET("user/{id}")
+    Call<Personne> getPersonne(@Path("id") int id);
+
+
 
 
 

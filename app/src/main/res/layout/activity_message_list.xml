@@ -7,6 +7,94 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- LinearLayout pour chaque message -->
+    <LinearLayout
+        android:id="@+id/message1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <!-- Photo du client -->
+        <ImageView
+            android:id="@+id/photo_client1"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/ic_launcher_background" />
+
+        <!-- Contenu du message (Nom, Prénom et dernier message) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/nom_prenom1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom Prénom"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/dernier_message1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dernier message..."
+                android:textSize="14sp"
+                android:textColor="#555555"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Ajouter d'autres messages ici -->
+    <LinearLayout
+        android:id="@+id/message2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:layout_marginTop="10dp">
+
+        <!-- Photo du client -->
+        <ImageView
+            android:id="@+id/photo_client2"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/user" />
+
+        <!-- Contenu du message (Nom, Prénom et dernier message) -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/nom_prenom2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nom Prénom"
+                android:textSize="16sp"
+                android:textColor="#000000"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:id="@+id/dernier_message2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dernier message..."
+                android:textSize="14sp"
+                android:textColor="#555555"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
     <!-- RecyclerView pour la liste des conversations -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerAnnonces"
@@ -14,9 +102,9 @@
         android:layout_height="0dp"
         android:padding="5dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"/>
 
     <!-- Menu de navigation en bas -->
     <com.google.android.material.bottomnavigation.BottomNavigationView

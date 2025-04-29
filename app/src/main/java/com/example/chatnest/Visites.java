@@ -50,7 +50,7 @@ public class Visites extends AppCompatActivity {
                     return true;
                 } else if (item.getItemId() == R.id.nav_profil) {
                     Toast.makeText(Visites.this, "Profil", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Visites.this, Visites.class);
+                    Intent intent = new Intent(Visites.this, Profil.class);
                     startActivity(intent);
                     return true;
                 } else if (item.getItemId() == R.id.nav_messages) {
