@@ -74,7 +74,7 @@ public class LogAgent extends AppCompatActivity {
 
                 // Configuration de Retrofit
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2/api/") // Vérifie que cette adresse est correcte
+                        .baseUrl("http://10.0.2.2:8000/api/") // Vérifie que cette adresse est correcte
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 

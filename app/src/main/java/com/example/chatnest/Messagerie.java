@@ -91,7 +91,7 @@ public class Messagerie extends AppCompatActivity {
             messageRequest.setId_plateforme(1);
 
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2/api/")
+                    .baseUrl("http://10.0.2.2:8000/api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
@@ -130,7 +130,7 @@ public class Messagerie extends AppCompatActivity {
     private final int REFRESH_INTERVAL = 3000; //
     private void fetchMessages(int idClient, int idAgent) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/api/")
+                .baseUrl("http://10.0.2.2:8000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

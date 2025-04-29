@@ -8,17 +8,21 @@ import android.content.Intent;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,10 +32,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Storevisites extends AppCompatActivity {
 
-    private static final String BASE_URL = "http://10.0.2.2/api/";
+    private static final String BASE_URL = "http://10.0.2.2:8000/api/";
     private int idAgent;
     private Button btnSubmitVisite;
 
+    private int clientvisiteid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,24 +47,64 @@ public class Storevisites extends AppCompatActivity {
         // Appel à la fonction pour récupérer l'ID de l'agent et effectuer l'appel API
         fetchClients();
         Button btnSubmitVisite = findViewById(R.id.btnSubmitVisite);
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8000/api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        btnSubmitVisite.setOnClickListener(v->{
+        ApiService apiService = retrofit.create(ApiService.class);
+        btnSubmitVisite.setOnClickListener(v -> {
             String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
-            Log.d("Storevisites", "ID Agent récupéré : " + idAgentStr);
+            String idAnnouncementStr = getIntent().getStringExtra("idPropriete");
+            String adresse = getIntent().getStringExtra("AnnounceAdress");
+
+            // Récupérer les valeurs des champs du formulaire
+            EditText dateVisiteField = findViewById(R.id.DateVisite);
+            EditText heureVisiteField = findViewById(R.id.HeureVisite);
+
+            String dateVisite = dateVisiteField.getText().toString().trim();
+            String heureVisite = heureVisiteField.getText().toString().trim();
+
 
             if (idAgentStr != null) {
                 try {
-                    idAgent = Integer.parseInt(idAgentStr);
-                } catch (NumberFormatException e) {
-                    Log.e("Erreur de conversion de l'ID agent", e.getMessage());
-                    idAgent = -1;
-                }
-            } else {
-                Log.e("ID agent non fourni", "L'ID de l'agent est manquant.");
-                idAgent = -1;
-            }
+                    int idAgent = Integer.parseInt(idAgentStr);
+                    int idClient = clientvisiteid;
+                    int idPropriete = Integer.parseInt(idAnnouncementStr);
 
+
+                    // Créer le Map avec les données
+                    Map<String, String> body = new HashMap<>();
+                    body.put("adresse", adresse != null ? adresse : "");
+                    body.put("date_visite", dateVisite);
+                    body.put("heure_visite", heureVisite);
+
+                    // Appel API avec @Body
+                    Call<Void> call = apiService.visitesSend(idAgent, idClient, idPropriete, body);
+                    call.enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+                            if (response.isSuccessful()) {
+                                Log.d("Visite", "Visite créée avec succès !");
+                                Toast.makeText(getApplicationContext(), "Visite enregistrée", Toast.LENGTH_SHORT).show();
+                                finish(); // Revenir à l'écran précédent
+                            } else {
+                                Log.e("Visite", "Erreur : " + response.code());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+                            Log.e("Visite", "Échec appel API : " + t.getMessage());
+                        }
+                    });
+
+                } catch (NumberFormatException e) {
+                    e.printStackTrace();
+                }
+            }
         });
+
     }
 
     private void fetchClients() {
@@ -129,7 +174,7 @@ public class Storevisites extends AppCompatActivity {
                                     // Récupérer l'ID du client
                                     int clientId = client.getId();
 
-
+                                    clientvisiteid = clientId;
                                     // Afficher l'ID du client dans les logs
                                     Log.d("Storevisites", "ID du client cliqué : " + clientId);
                                 }

@@ -79,7 +79,7 @@ public class Home extends AppCompatActivity {
 
     private void makeApiRequest() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2/api/")
+                .baseUrl("http://10.0.2.2:8000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 

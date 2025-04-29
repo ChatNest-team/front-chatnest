@@ -4,6 +4,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -43,7 +44,8 @@ public interface ApiService {
     Call<Void> visitesSend(
             @Path("id_agent") int idAgent,
             @Path("id_client") int idClient,
-            @Path("id_propriete") int idPropriete
+            @Path("id_propriete") int idPropriete,
+            @Body Map<String, String> body
     );
 
 

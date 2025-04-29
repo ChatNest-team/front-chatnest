@@ -56,9 +56,11 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         holder.idstorevisite.setOnClickListener(v->{
             String agentId = sharedPreferences.getString("id", null);
             String announcementId = String.valueOf(announcement.getIdPropriete());
+            String announcementAdress = String.valueOf(announcement.getAdresse());
             if (agentId != null) {
                 Intent intent = new Intent(context, Storevisites.class);
                 intent.putExtra("idAgent", agentId);
+                intent.putExtra("AnnounceAdress", announcementAdress);
                 intent.putExtra("idPropriete", announcementId);
                 context.startActivity(intent); // Lancer l'activité
             } else {
