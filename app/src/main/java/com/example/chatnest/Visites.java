@@ -5,12 +5,15 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -34,7 +37,34 @@ public class Visites extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visites);
 
+        // Initialiser la navigation
+        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+
+        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.nav_home) {
+                    Toast.makeText(Visites.this, "Accueil", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Visites.this, Home.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_profil) {
+                    Toast.makeText(Visites.this, "Profil", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Visites.this, Visites.class);
+                    startActivity(intent);
+                    return true;
+                } else if (item.getItemId() == R.id.nav_messages) {
+                    Toast.makeText(Visites.this, "Messages", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Visites.this, Messagelist.class);
+                    startActivity(intent);
+                    return true;
+                }
+                return false;
+            }
+        });
+
         linearLayoutVisites = findViewById(R.id.linearLayoutVisites);
+
         // Récupérer l'ID agent passé par l'Intent
         Intent intent = getIntent();
         int idAgent = intent.getIntExtra("idAgent", -1);
@@ -48,6 +78,8 @@ public class Visites extends AppCompatActivity {
 
 
     }
+
+
 
     private void fetchVisites(int idAgent) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -143,7 +175,7 @@ public class Visites extends AppCompatActivity {
         adresseVisite.setText("Adresse: " + visite.getAdresse());
         adresseVisite.setTextSize(14);
         adresseVisite.setTextColor(getResources().getColor(android.R.color.darker_gray));
-        adresseVisite.setVisibility(View.GONE); // Cachée par défaut
+        adresseVisite.setVisibility(View.VISIBLE); // Cachée par défaut
 
         // Ajouter les TextViews dans le LinearLayout infosVisite
         infosVisite.addView(nomClient);
