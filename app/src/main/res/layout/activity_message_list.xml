@@ -1,117 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F0F0F0">
 
-    <!-- LinearLayout pour chaque message -->
-    <LinearLayout
-        android:id="@+id/message1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-
-        <!-- Photo du client -->
-        <ImageView
-            android:id="@+id/photo_client1"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/ic_launcher_background" />
-
-        <!-- Contenu du message (Nom, Prénom et dernier message) -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/nom_prenom1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom Prénom"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:layout_marginBottom="5dp"/>
-
-            <TextView
-                android:id="@+id/dernier_message1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dernier message..."
-                android:textSize="14sp"
-                android:textColor="#555555"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- Ajouter d'autres messages ici -->
-    <LinearLayout
-        android:id="@+id/message2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp"
-        android:layout_marginTop="10dp">
-
-        <!-- Photo du client -->
-        <ImageView
-            android:id="@+id/photo_client2"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginEnd="10dp"
-            android:src="@drawable/user" />
-
-        <!-- Contenu du message (Nom, Prénom et dernier message) -->
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <TextView
-                android:id="@+id/nom_prenom2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nom Prénom"
-                android:textSize="16sp"
-                android:textColor="#000000"
-                android:layout_marginBottom="5dp"/>
-
-            <TextView
-                android:id="@+id/dernier_message2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dernier message..."
-                android:textSize="14sp"
-                android:textColor="#555555"/>
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- RecyclerView pour la liste des conversations -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerAnnonces"
+    <!-- Header spacer -->
+    <View
+        android:id="@+id/headerSpacer"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:padding="5dp"
+        android:layout_height="24dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Menu de navigation en bas -->
+    <!-- Titre centré -->
+    <TextView
+        android:id="@+id/tvMesMessages"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Mes Messages"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:paddingVertical="12dp"
+        android:background="#FFFFFF"
+        app:layout_constraintTop_toBottomOf="@id/headerSpacer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- ScrollView pour rendre la CardView scrollable -->
+    <android.widget.ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvMesMessages"
+        app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- CardView contenant les visites -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/listConversation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <LinearLayout
+                android:id="@+id/linearLayoutConversation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+                <!-- Contenu des visites ici -->
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </android.widget.ScrollView>
+
+    <!-- Bottom navigation -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
+        android:layout_height="56dp"
+        android:background="#FFFFFF"
         app:menu="@menu/bottom_menu"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
