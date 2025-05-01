@@ -95,7 +95,8 @@ public class Messagelist extends AppCompatActivity {
                             SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
                             String role = sharedPreferences.getString("role", null);
                             String userId = sharedPreferences.getString("id", null);
-
+                            //Log.d("Session", "Rôle : " + role);
+                            //Log.d("Session", "ID Utilisateur : " + userId);
                             if (role == null || userId == null) {
                                 Log.e("CLICK", "Données de session manquantes");
                                 return;
@@ -117,6 +118,8 @@ public class Messagelist extends AppCompatActivity {
                             Intent intent = new Intent(Messagelist.this, Messagerie.class);
                             intent.putExtra("idAgent", String.valueOf(idAgent));
                             intent.putExtra("idClient", String.valueOf(idClient));
+                            intent.putExtra("role", role);
+
                             startActivity(intent);
                         });
 

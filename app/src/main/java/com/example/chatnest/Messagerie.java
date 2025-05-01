@@ -178,16 +178,14 @@ public class Messagerie extends AppCompatActivity {
                             View messageView;
                             TextView tvMessage;
 
-                            // Si le client est l'envoyeur → message à droite
-                            if ("client".equalsIgnoreCase(message.getEnvoyeur())) {
+                            if (role != null && role.equalsIgnoreCase(message.getEnvoyeur())) {
                                 messageView = inflater.inflate(R.layout.item_message_send, messageList, false);
                                 tvMessage = messageView.findViewById(R.id.messagetextsend);
                             } else {
-                                // Sinon (agent) → message à gauche
+                                // Sinon → message à gauche
                                 messageView = inflater.inflate(R.layout.item_message_recived, messageList, false);
                                 tvMessage = messageView.findViewById(R.id.messagetextreceived);
                             }
-
                             tvMessage.setText(message.getTexte());
                             messageList.addView(messageView);
                         }
