@@ -75,9 +75,26 @@ public class Home extends AppCompatActivity {
 
                     return true;
                 } else if (item.getItemId() == R.id.nav_messages) {
-                    Toast.makeText(Home.this, "Messages", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Home.this, Messagelist.class);
-                    startActivity(intent);
+                    String idPersonne = sharedPreferences.getString("id", null);
+                    String role = sharedPreferences.getString("role", null);
+
+                    if (idPersonne != null) {
+                        try {
+                            int idPers = Integer.parseInt(idPersonne);
+
+                            Intent intent = new Intent(Home.this, Messagelist.class);
+                            intent.putExtra("idPersonne", idPers);
+                            intent.putExtra("role", role);
+                            startActivity(intent);
+                        } catch (NumberFormatException e) {
+                            Log.e("Navigation", "Erreur de format d'ID");
+                            Toast.makeText(Home.this, "Erreur de format d'ID", Toast.LENGTH_SHORT).show();
+                        }
+                    } else {
+                        Log.e("Navigation", "Aucun ID trouvé pour messages");
+                        Toast.makeText(Home.this, "Aucun ID trouvé", Toast.LENGTH_SHORT).show();
+                    }
+
                     return true;
                 } else if (item.getItemId() == R.id.nav_visite) {
                     // Récupération de l'ID de l'agent

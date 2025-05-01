@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <!-- CardView contenant les visites -->
+        <!-- CardView contenant les conversations -->
         <androidx.cardview.widget.CardView
             android:id="@+id/listConversation"
             android:layout_width="match_parent"
@@ -55,10 +55,56 @@
                 android:id="@+id/linearLayoutConversation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-                <!-- Contenu des visites ici -->
+                android:orientation="horizontal"
+                android:padding="12dp"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:src="@drawable/user"
+                    android:layout_marginEnd="12dp"
+                    android:scaleType="centerCrop" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nom de l'utilisateur"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="#000000" />
+
+                    <TextView
+                        android:id="@+id/last_message"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dernier message"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:maxLines="1"
+                        android:ellipsize="end" />
+
+                    <!-- Heure de la dernière activité -->
+                    <TextView
+                        android:id="@+id/last_activity_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12:30 PM"
+                        android:textSize="12sp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@android:color/darker_gray" />
+
+                </LinearLayout>
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 

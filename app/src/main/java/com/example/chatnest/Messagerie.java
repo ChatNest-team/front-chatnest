@@ -9,8 +9,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -37,14 +39,26 @@ public class Messagerie extends AppCompatActivity {
         messageInput = findViewById(R.id.etMessage);
 
         String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
-        String idClientStr = getIntent().getStringExtra("idClient");
+        String role = getIntent().getStringExtra("role");
 
-        int idClient = Integer.parseInt(idClientStr); // Assure-toi que l'ID client est valide
+        String idClientStr = getIntent().getStringExtra("idClient");
+        int idClient = -1;
+
+        if (idClientStr != null) {
+            try {
+                idClient = Integer.parseInt(idClientStr);
+            } catch (NumberFormatException e) {
+                Log.e(TAG, "Erreur de conversion de l'ID client", e);
+            }
+        } else {
+            Log.w(TAG, "ID client non fourni");
+        }
 
         // Convertir l'ID agent
         if (idAgentStr != null) {
             try {
                 idAgent = Integer.parseInt(idAgentStr);
+
             } catch (NumberFormatException e) {
                 Log.e(TAG, "Erreur de conversion de l'ID agent", e);
                 idAgent = -1;
@@ -54,18 +68,25 @@ public class Messagerie extends AppCompatActivity {
             idAgent = -1;
         }
 
+        if (idClient != -1 ) {
+            fetchMessages(idClient, idAgent,role);
+        }
+
+        if (idClient != -1 ) {
+            fetchMessages(idClient, idAgent,role);
+        }
+
         // Bouton d'envoi du message
 
-        ImageView send = findViewById(R.id.ivEnvoyer);
+        final ImageView send = findViewById(R.id.ivEnvoyer);
 
-
-
-
+        int finalIdClient = idClient;
         send.setOnClickListener(v -> {
             String messagetoSend = messageInput.getText().toString();
 
             if (messagetoSend.isEmpty()) {
                 Log.e(TAG, "Message vide");
+                Toast.makeText(Messagerie.this, "Le message ne peut pas être vide", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -84,6 +105,7 @@ public class Messagerie extends AppCompatActivity {
             // Effacer le champ input
             messageInput.setText("");
 
+
             // Envoi du message au serveur
             MessageRequest messageRequest = new MessageRequest();
             messageRequest.setTexte_Message(messagetoSend);
@@ -97,9 +119,12 @@ public class Messagerie extends AppCompatActivity {
 
             ApiService apiService = retrofit.create(ApiService.class);
 
-            apiService.messageSend(idClient, idAgent, messageRequest).enqueue(new retrofit2.Callback<Void>() {
+            apiService.messageSend(finalIdClient, idAgent, messageRequest).enqueue(new retrofit2.Callback<Void>() {
                 @Override
                 public void onResponse(retrofit2.Call<Void> call, retrofit2.Response<Void> response) {
+                    // Cacher l'indicateur de progression
+                   // progressBar.setVisibility(View.GONE);
+
                     if (response.isSuccessful()) {
                         Log.d(TAG, "Message envoyé avec succès !");
                     } else {
@@ -110,15 +135,19 @@ public class Messagerie extends AppCompatActivity {
 
                 @Override
                 public void onFailure(retrofit2.Call<Void> call, Throwable t) {
+                    // Cacher l'indicateur de progression
+                    //progressBar.setVisibility(View.GONE);
+
                     // Afficher une erreur avec un bouton "Réessayer"
                     showRetryMessage("Échec de l'envoi : " + t.getMessage());
                 }
             });
         });
 
+
         // Récupérer les messages existants
         if (idClient != -1 && idAgent != -1) {
-            fetchMessages(idClient, idAgent);
+            fetchMessages(idClient, idAgent,role);
         }
     }
 
@@ -128,7 +157,7 @@ public class Messagerie extends AppCompatActivity {
 
     private final Handler handler = new Handler();
     private final int REFRESH_INTERVAL = 3000; //
-    private void fetchMessages(int idClient, int idAgent) {
+    private void fetchMessages(int idClient, int idAgent, String role) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8000/api/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -197,6 +226,7 @@ public class Messagerie extends AppCompatActivity {
 
         messageList.addView(errorView);
     }
+
 
 
 }

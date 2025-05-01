@@ -2,9 +2,7 @@ package com.example.chatnest;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -23,11 +21,14 @@ public interface ApiService {
     @GET("announcements")
     Call<List<Announcement>> getAnnouncements();
 
+
     @POST("send-message/{id_client}/{id_agent}")
     Call<Void> messageSend(
             @Path("id_client") int idClient,
             @Path("id_agent") int idAgent,
-            @Body MessageRequest messageRequest);
+            @Body MessageRequest messageRequest
+    );
+
 
     @GET("messages/{id_client}/{id_agent}")
     Call<List<Message>> getMessages(
@@ -56,7 +57,8 @@ public interface ApiService {
     @GET("user/{id}")
     Call<Personne> getPersonne(@Path("id") int id);
 
-
+    @GET("message/{id}")
+    Call<List<Conversation>> getConversation(@Path("id") int id);
 
 
 

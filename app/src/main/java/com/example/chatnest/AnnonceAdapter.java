@@ -55,6 +55,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
 
         holder.idstorevisite.setOnClickListener(v->{
             String agentId = sharedPreferences.getString("id", null);
+            String role = sharedPreferences.getString("role", null);
             String announcementId = String.valueOf(announcement.getIdPropriete());
             String announcementAdress = String.valueOf(announcement.getAdresse());
             if (agentId != null) {
@@ -62,6 +63,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
                 intent.putExtra("idAgent", agentId);
                 intent.putExtra("AnnounceAdress", announcementAdress);
                 intent.putExtra("idPropriete", announcementId);
+                intent.putExtra("role", "agent");
                 context.startActivity(intent); // Lancer l'activité
             } else {
                 Log.e("AnnonceAdapter", "Agent ID est null !");

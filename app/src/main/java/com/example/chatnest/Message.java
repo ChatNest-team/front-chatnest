@@ -6,6 +6,7 @@ public class Message {
 
     private String envoyeur;
 
+
     public Message(String texte, boolean isFromMe, String envoyeur) {
         this.texte = texte;
         this.isFromMe = isFromMe;
