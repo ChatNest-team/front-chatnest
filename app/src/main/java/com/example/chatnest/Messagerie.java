@@ -60,11 +60,11 @@ public class Messagerie extends AppCompatActivity {
                 idAgent = Integer.parseInt(idAgentStr);
 
             } catch (NumberFormatException e) {
-                Log.e(TAG, "Erreur de conversion de l'ID agent", e);
+               // Log.e(TAG, "Erreur de conversion de l'ID agent", e);
                 idAgent = -1;
             }
         } else {
-            Log.w(TAG, "ID agent non fourni");
+            //Log.w(TAG, "ID agent non fourni");
             idAgent = -1;
         }
 

@@ -2,6 +2,7 @@ package com.example.chatnest;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -42,7 +43,7 @@ public class Messagelist extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
         linearLayoutConversation = findViewById(R.id.linearLayoutConversation);
 
         Intent intent = getIntent();
@@ -91,17 +92,34 @@ public class Messagelist extends AppCompatActivity {
                         );
 
                         conversationLayout.setOnClickListener(v -> {
-                            int idInterlocuteur = conversation.getInterlocuteur_id();
-                            String nomInterlocuteur = conversation.getInterlocuteur_nom();
+                            SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
+                            String role = sharedPreferences.getString("role", null);
+                            String userId = sharedPreferences.getString("id", null);
 
-                            // Log pour vérifier l'ID et le nom
-                            Log.d("CLICK", "Interlocuteur ID : " + idInterlocuteur);
+                            if (role == null || userId == null) {
+                                Log.e("CLICK", "Données de session manquantes");
+                                return;
+                            }
 
-                            Intent intente = new Intent(Messagelist.this, Messagerie.class);
-                            intente.putExtra("idInterlocuteur", String.valueOf(idInterlocuteur));  // Conversion en String
-                            intente.putExtra("nomInterlocuteur", nomInterlocuteur);
-                            startActivity(intente);
+                            int idAgent, idClient;
+
+                            if (role.equals("agent")) {
+                                idAgent = Integer.parseInt(userId); // la personne connectée
+                                idClient = conversation.getInterlocuteur_id(); // l'autre
+                            } else {
+                                idClient = Integer.parseInt(userId);
+                                idAgent = conversation.getInterlocuteur_id();
+                            }
+
+                            Log.d("CLICK", "Agent ID : " + idAgent);
+                            Log.d("CLICK", "Client ID : " + idClient);
+
+                            Intent intent = new Intent(Messagelist.this, Messagerie.class);
+                            intent.putExtra("idAgent", String.valueOf(idAgent));
+                            intent.putExtra("idClient", String.valueOf(idClient));
+                            startActivity(intent);
                         });
+
 
                         linearLayoutConversation.addView(conversationLayout);
                     }

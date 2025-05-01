@@ -104,8 +104,12 @@ public class LogAgent extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 editor.putString("id", String.valueOf(auth.agent.id));
                                 editor.putString("role", String.valueOf(auth.agent.role));
+                                Log.d("SESSION_SAVE", "role enregistré : " + auth.agent.role);
+
                                 editor.apply();
                                 //Log.d("Login", "role : " + auth.agent.role);
+
+
 
                                 Intent intent = new Intent(LogAgent.this, Home.class);
                                 startActivity(intent);

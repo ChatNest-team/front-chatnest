@@ -39,7 +39,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
         Context context = holder.itemView.getContext();
         SharedPreferences sharedPreferences = context.getSharedPreferences("MySession", Context.MODE_PRIVATE);
         String userRole = sharedPreferences.getString("role", "client");
-        Log.d("AnnonceAdapter", "Rôle de l'utilisateur : " + userRole);
+        //Log.d("AnnonceAdapter", "Rôle de l'utilisateur : " + userRole);
         holder.tvTitreAnnonce.setText("Titre : " + announcement.getNom());
         holder.tvPrix.setText(String.format("Prix : %.2f €", announcement.getPrixPropriete()));
         holder.tvAdresse.setText("Adresse : " + announcement.getAdresse());
@@ -55,7 +55,7 @@ public class AnnonceAdapter extends RecyclerView.Adapter<AnnonceAdapter.AnnonceV
 
         holder.idstorevisite.setOnClickListener(v->{
             String agentId = sharedPreferences.getString("id", null);
-            String role = sharedPreferences.getString("role", null);
+
             String announcementId = String.valueOf(announcement.getIdPropriete());
             String announcementAdress = String.valueOf(announcement.getAdresse());
             if (agentId != null) {
