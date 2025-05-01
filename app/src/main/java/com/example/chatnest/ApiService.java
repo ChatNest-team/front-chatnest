@@ -22,10 +22,10 @@ public interface ApiService {
     Call<List<Announcement>> getAnnouncements();
 
 
-    @POST("send-message/{id_client}/{id_agent}")
+    @POST("send-message/{envoyeur}/{recepteur}")
     Call<Void> messageSend(
-            @Path("id_client") int idClient,
-            @Path("id_agent") int idAgent,
+            @Path("envoyeur") int idClient,
+            @Path("recepteur") int idAgent,
             @Body MessageRequest messageRequest
     );
 

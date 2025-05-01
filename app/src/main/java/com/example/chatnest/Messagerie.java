@@ -1,5 +1,7 @@
 package com.example.chatnest;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -38,8 +40,10 @@ public class Messagerie extends AppCompatActivity {
 
         messageInput = findViewById(R.id.etMessage);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
         String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
         String role = getIntent().getStringExtra("role");
+
 
         String idClientStr = getIntent().getStringExtra("idClient");
         int idClient = -1;
@@ -105,11 +109,14 @@ public class Messagerie extends AppCompatActivity {
             // Effacer le champ input
             messageInput.setText("");
 
+            Intent intent = getIntent();
+            int idPersonne = intent.getIntExtra("idPersonne", -1);
 
             // Envoi du message au serveur
             MessageRequest messageRequest = new MessageRequest();
             messageRequest.setTexte_Message(messagetoSend);
-            messageRequest.setEnvoyeur("client");
+            messageRequest.setEnvoyeurId(idPersonne);
+            messageRequest.setEnvoyeur(role);
             messageRequest.setId_plateforme(1);
 
             Retrofit retrofit = new Retrofit.Builder()

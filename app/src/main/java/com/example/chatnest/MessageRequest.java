@@ -6,8 +6,11 @@ public class MessageRequest {
     private String Texte_Message;
     private String Statut;
     private String envoyeur;
+
+    private int envoyeurId;
     private int id_plateforme;
     //private int id_Messagerie;
+
 
     public Integer getId_client() {
         return id_client;
@@ -49,6 +52,14 @@ public class MessageRequest {
         this.envoyeur = envoyeur;
     }
 
+    public int getEnvoyeurId() {
+        return envoyeurId;
+    }
+
+    public void setEnvoyeurId(int envoyeurId) {
+        this.envoyeurId = envoyeurId;
+    }
+
     public int getId_plateforme() {
         return id_plateforme;
     }
@@ -56,6 +67,4 @@ public class MessageRequest {
     public void setId_plateforme(int id_plateforme) {
         this.id_plateforme = id_plateforme;
     }
-
-
 }
