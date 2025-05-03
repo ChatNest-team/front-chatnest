@@ -23,7 +23,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import java.util.List;
 
-public class Messagerie extends AppCompatActivity {
+public class Messagerie extends BaseActivity {
 
     private static final String TAG = "MessagerieActivity";
 

@@ -9,16 +9,21 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.List;
 
@@ -28,7 +33,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Messagelist extends AppCompatActivity {
+public class Messagelist extends BaseActivity {
 
     private LinearLayout linearLayoutConversation;
 
@@ -45,6 +50,9 @@ public class Messagelist extends AppCompatActivity {
         });
         SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
         linearLayoutConversation = findViewById(R.id.linearLayoutConversation);
+
+
+
 
         Intent intent = getIntent();
         int idPersonne = intent.getIntExtra("idPersonne", -1);

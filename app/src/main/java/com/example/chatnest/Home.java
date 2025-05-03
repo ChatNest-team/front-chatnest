@@ -26,7 +26,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Home extends AppCompatActivity {
+public class Home extends BaseActivity {
 
     private RecyclerView recyclerView;
     private AnnonceAdapter annonceAdapter;

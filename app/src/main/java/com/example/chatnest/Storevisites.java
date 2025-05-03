@@ -5,13 +5,11 @@ import static com.example.chatnest.Messagerie.EXTRA_ID_AGENT;
 import android.os.Bundle;
 import android.util.Log;
 import android.content.Intent;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +28,10 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Storevisites extends AppCompatActivity {
+public class Storevisites extends BaseActivity {
 
     private static final String BASE_URL = "http://10.0.2.2:8000/api/";
     private int idAgent;
-    private Button btnSubmitVisite;
-
     private int clientvisiteid;
 
     @Override
@@ -44,42 +40,41 @@ public class Storevisites extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_storevisites);
 
-        // Appel à la fonction pour récupérer l'ID de l'agent et effectuer l'appel API
-        fetchClients();
+        // Initialisation du bouton
         Button btnSubmitVisite = findViewById(R.id.btnSubmitVisite);
+
+        // Récupération des clients dès le chargement
+        fetchClients();
+
+        // Rétrofit
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8000/api/")
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
-
         ApiService apiService = retrofit.create(ApiService.class);
+
         btnSubmitVisite.setOnClickListener(v -> {
             String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
             String idAnnouncementStr = getIntent().getStringExtra("idPropriete");
             String adresse = getIntent().getStringExtra("AnnounceAdress");
 
-            // Récupérer les valeurs des champs du formulaire
             EditText dateVisiteField = findViewById(R.id.DateVisite);
             EditText heureVisiteField = findViewById(R.id.HeureVisite);
 
             String dateVisite = dateVisiteField.getText().toString().trim();
             String heureVisite = heureVisiteField.getText().toString().trim();
 
-
-            if (idAgentStr != null) {
+            if (idAgentStr != null && idAnnouncementStr != null) {
                 try {
                     int idAgent = Integer.parseInt(idAgentStr);
-                    int idClient = clientvisiteid;
                     int idPropriete = Integer.parseInt(idAnnouncementStr);
+                    int idClient = clientvisiteid;
 
-
-                    // Créer le Map avec les données
                     Map<String, String> body = new HashMap<>();
                     body.put("adresse", adresse != null ? adresse : "");
                     body.put("date_visite", dateVisite);
                     body.put("heure_visite", heureVisite);
 
-                    // Appel API avec @Body
                     Call<Void> call = apiService.visitesSend(idAgent, idClient, idPropriete, body);
                     call.enqueue(new Callback<Void>() {
                         @Override
@@ -87,24 +82,28 @@ public class Storevisites extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 Log.d("Visite", "Visite créée avec succès !");
                                 Toast.makeText(getApplicationContext(), "Visite enregistrée", Toast.LENGTH_SHORT).show();
-                                finish(); // Revenir à l'écran précédent
+                                finish();
                             } else {
                                 Log.e("Visite", "Erreur : " + response.code());
+                                Toast.makeText(getApplicationContext(), "Erreur lors de l’enregistrement", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<Void> call, Throwable t) {
                             Log.e("Visite", "Échec appel API : " + t.getMessage());
+                            Toast.makeText(getApplicationContext(), "Échec réseau : " + t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
                 } catch (NumberFormatException e) {
-                    e.printStackTrace();
+                    Log.e("Visite", "Erreur de format : " + e.getMessage());
+                    Toast.makeText(getApplicationContext(), "ID invalide", Toast.LENGTH_SHORT).show();
                 }
+            } else {
+                Toast.makeText(getApplicationContext(), "Données manquantes", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
 
     private void fetchClients() {
@@ -115,12 +114,9 @@ public class Storevisites extends AppCompatActivity {
             try {
                 idAgent = Integer.parseInt(idAgentStr);
             } catch (NumberFormatException e) {
-                Log.e("Erreur de conversion de l'ID agent", e.getMessage());
+                Log.e("Storevisites", "Erreur conversion ID agent : " + e.getMessage());
                 idAgent = -1;
             }
-        } else {
-            Log.e("ID agent non fourni", "L'ID de l'agent est manquant.");
-            idAgent = -1;
         }
 
         if (idAgent != -1) {
@@ -130,7 +126,6 @@ public class Storevisites extends AppCompatActivity {
                     .build();
 
             ApiService apiService = retrofit.create(ApiService.class);
-
             Call<List<Client>> call = apiService.getClients(idAgent);
 
             call.enqueue(new Callback<List<Client>>() {
@@ -138,67 +133,46 @@ public class Storevisites extends AppCompatActivity {
                 public void onResponse(Call<List<Client>> call, Response<List<Client>> response) {
                     if (response.isSuccessful() && response.body() != null) {
                         List<Client> clients = response.body();
-
-                        // Référence au LinearLayout où les clients seront ajoutés
                         LinearLayout lClients = findViewById(R.id.lClients);
-                        lClients.removeAllViews();  // Vider le LinearLayout avant d'ajouter les nouveaux clients
+                        lClients.removeAllViews();
 
-                        // Créer un layout pour chaque client
                         for (Client client : clients) {
-                            // Créer un RelativeLayout pour chaque client
                             LinearLayout clientLayout = (LinearLayout) getLayoutInflater().inflate(R.layout.clientitem, null);
 
-
-                            // Référence au TextView pour le nom/prénom du client
                             TextView clientName = clientLayout.findViewById(R.id.clientName);
-                            clientName.setText(client.getNom() + " " + client.getPrenom());  // Nom et prénom dynamiques
+                            clientName.setText(client.getNom() + " " + client.getPrenom());
 
-                            // Référence à l'ImageView pour l'image du client
                             ImageView clientImage = clientLayout.findViewById(R.id.clientImage);
-                            String imageUrl = client.getImage(); // Exemple : URL de la photo
+                            String imageUrl = client.getImage();
+
                             if (imageUrl != null && !imageUrl.isEmpty()) {
-                                // Utilisez Glide ou Picasso pour charger l'image depuis une URL
                                 Glide.with(Storevisites.this)
                                         .load(imageUrl)
-                                        .circleCrop()  // Pour rendre l'image ronde
+                                        .circleCrop()
                                         .into(clientImage);
                             } else {
-                                // Image par défaut si aucune photo n'est fournie
-                                clientImage.setImageResource(R.drawable.user); // Image par défaut
+                                clientImage.setImageResource(R.drawable.user);
                             }
 
-                            // Ajouter un OnClickListener pour l'image du client
-                            clientImage.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    // Récupérer l'ID du client
-                                    int clientId = client.getId();
-
-                                    clientvisiteid = clientId;
-                                    // Afficher l'ID du client dans les logs
-                                    Log.d("Storevisites", "ID du client cliqué : " + clientId);
-                                }
+                            clientImage.setOnClickListener(v -> {
+                                clientvisiteid = client.getId();
+                                Log.d("Storevisites", "Client sélectionné ID : " + clientvisiteid);
                             });
 
-                            // Ajouter le layout du client au LinearLayout principal
                             lClients.addView(clientLayout);
                         }
                     } else {
-                        Log.e("Storevisites", "Erreur dans la réponse");
+                        Log.e("Storevisites", "Erreur dans la réponse des clients");
                     }
                 }
 
                 @Override
                 public void onFailure(Call<List<Client>> call, Throwable t) {
-                    Log.e("Storevisites", "Échec : " + t.getMessage());
+                    Log.e("Storevisites", "Erreur réseau clients : " + t.getMessage());
                 }
             });
         } else {
-            Log.e("Storevisites", "ID de l'agent invalide, impossible de récupérer les clients.");
+            Log.e("Storevisites", "ID agent invalide, clients non récupérés.");
         }
     }
-
-
-
-
 }

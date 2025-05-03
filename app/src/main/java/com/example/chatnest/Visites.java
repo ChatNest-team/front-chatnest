@@ -27,7 +27,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Visites extends AppCompatActivity {
+public class Visites extends BaseActivity {
 
     private LinearLayout linearLayoutVisites;
     private int idAgent;

@@ -1,79 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center">
+    android:orientation="vertical">
 
-    <!-- Titre du formulaire -->
-    <TextView
-        android:id="@+id/CreateVisiteTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Créer une Visite"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp">
 
-    <!-- Champ Date de Visite -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Date de la Visite"
-        android:layout_marginBottom="8dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
 
-    <EditText
-        android:id="@+id/DateVisite"
+            <!-- Titre du formulaire -->
+            <TextView
+                android:id="@+id/CreateVisiteTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Créer une Visite"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Date -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Date de la Visite"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/DateVisite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:hint="jj/mm/aaaa"/>
+
+            <!-- Heure -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Heure de la Visite"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <EditText
+                android:id="@+id/HeureVisite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="time"
+                android:hint="hh:mm"/>
+
+            <!-- Clients -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Clients"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"/>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:id="@+id/lClients"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"/>
+
+            </HorizontalScrollView>
+
+            <!-- Bouton -->
+            <Button
+                android:id="@+id/btnSubmitVisite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Soumettre"
+                android:layout_marginTop="24dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Navigation en bas -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="date"
-        android:hint="jj/mm/aaaa"
-        android:importantForAccessibility="yes"
-        android:contentDescription="@string/date_visite"/>
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_menu"
+        app:itemIconTint="@color/selector_nav_icon" />
 
-    <!-- Champ Heure de Visite -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Heure de la Visite"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
-
-    <EditText
-        android:id="@+id/HeureVisite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="time"
-        android:hint="hh:mm"
-        android:importantForAccessibility="yes"
-        android:contentDescription="@string/heure_visite"/>
-
-    <!-- Affichage horizontal des clients sous forme de bulles -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Clients"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"/>
-
-    <LinearLayout
-        android:id="@+id/lClients"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:scrollbars="horizontal"
-        android:gravity="start|center_vertical">
-
-        <!-- Ce conteneur contiendra dynamiquement les vues des clients -->
-
-    </LinearLayout>
-
-    <!-- Bouton de Soumission -->
-    <Button
-        android:id="@+id/btnSubmitVisite"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Soumettre"
-        android:layout_marginTop="24dp"/>
 </LinearLayout>
