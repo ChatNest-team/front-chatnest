@@ -99,6 +99,7 @@ public class Visites extends BaseActivity {
 
                         if (visiteid > 0) {
                             Button btnSupprimer = new Button(Visites.this);
+                            Button btnUpdate = new Button(Visites.this);
                             btnSupprimer.setText("Supprimer");
                             // Store the ID as an object, not as a resource ID
                             btnSupprimer.setTag(Integer.valueOf(visiteid));
@@ -110,7 +111,23 @@ public class Visites extends BaseActivity {
                                 }
                             });
 
+                            btnUpdate.setText("Modifier");
+                            btnUpdate.setTag(Integer.valueOf(visiteid));
+
+                            btnUpdate.setOnClickListener(v->{
+                                // Safely cast the tag to Integer
+                                Integer visiteIdObj = (Integer) v.getTag();
+                                if (visiteIdObj != null) {
+                                    //metre a jours
+                                    //SupprimerVisite(visiteIdObj.intValue());
+                                    Intent intent = new Intent(Visites.this, Update.class);
+                                    intent.putExtra("idVisite", visiteIdObj.intValue());
+                                    startActivity(intent);
+                                }
+                            });
+                            buttonsLayout.addView(btnUpdate);
                             buttonsLayout.addView(btnSupprimer);
+
                         } else {
                             Log.e("Visites", "ID de visite invalide : " + visiteid);
                         }
@@ -161,4 +178,6 @@ public class Visites extends BaseActivity {
             }
         });
     }
+
+
 }

@@ -39,7 +39,7 @@ public class LogAgent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_agent);
-
+        getSupportActionBar().hide();
         // Gestion de la mise en page des fenêtres
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
