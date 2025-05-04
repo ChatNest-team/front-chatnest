@@ -50,8 +50,7 @@ public class VisiteAdapter extends BaseAdapter {
         TextView dateVisite = convertView.findViewById(R.id.date_visite);
         TextView heureVisite = convertView.findViewById(R.id.heure_visite);
         TextView adresseVisite = convertView.findViewById(R.id.adresse_visite);
-        Button btnModifier = convertView.findViewById(R.id.btn_modifier);
-        Button btnSupprimer = convertView.findViewById(R.id.btn_supprimer);
+
 
         // Afficher les données dans les TextViews
         nomClient.setText(visite.getNom_client());
@@ -66,15 +65,6 @@ public class VisiteAdapter extends BaseAdapter {
         } else {
             adresseVisite.setVisibility(View.GONE);
         }
-
-        // Ajouter des actions aux boutons si nécessaire
-        btnModifier.setOnClickListener(v -> {
-            // Action de modification
-        });
-
-        btnSupprimer.setOnClickListener(v -> {
-            // Action de suppression
-        });
 
         return convertView;
     }

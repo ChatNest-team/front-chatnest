@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -41,11 +42,11 @@ public class Visites extends BaseActivity {
 
         getSupportActionBar().hide();
 
-        linearLayoutVisites = findViewById(R.id.linearLayoutVisites);
+        linearLayoutVisites = findViewById(R.id.visiteLayout);
 
         // Récupérer l'ID agent passé par l'Intent
         Intent intent = getIntent();
-        int idAgent = intent.getIntExtra("idAgent", -1);
+        idAgent = intent.getIntExtra("idAgent", -1);
 
         if (idAgent != -1) {
             Log.e("Visites", "ID agent reçu : " + idAgent);
@@ -53,11 +54,7 @@ public class Visites extends BaseActivity {
         } else {
             Log.e("Visites", "ID agent invalide");
         }
-
-
     }
-
-
 
     private void fetchVisites(int idAgent) {
         Retrofit retrofit = new Retrofit.Builder()
@@ -75,21 +72,51 @@ public class Visites extends BaseActivity {
                     Log.e("API", "Code HTTP: " + response.code());
                     return;
                 }
+                LayoutInflater inflater = LayoutInflater.from(Visites.this);
 
                 List<Visite> visites = response.body();
                 if (visites != null && !visites.isEmpty()) {
-                    Log.d("API", "Nombre de visites récupérées: " + visites.size());
-
-                    // Vider le LinearLayout avant d'ajouter de nouvelles vues
                     linearLayoutVisites.removeAllViews();
 
-                    // Ajouter chaque visite comme un LinearLayout dynamique
                     for (Visite visite : visites) {
-                        LinearLayout visiteLayout = createVisiteLayout(visite);
-                        linearLayoutVisites.addView(visiteLayout);
+                        View visiteView = inflater.inflate(R.layout.list_item_visite, linearLayoutVisites, false);
+
+                        TextView nomClient = visiteView.findViewById(R.id.nom_client);
+                        TextView prenomClient = visiteView.findViewById(R.id.prenom_client);
+                        TextView dateVisite = visiteView.findViewById(R.id.date_visite);
+                        TextView heureVisite = visiteView.findViewById(R.id.heure_visite);
+                        TextView adresseVisite = visiteView.findViewById(R.id.adresse_visite);
+
+                        nomClient.setText(visite.getNom_client());
+                        prenomClient.setText(visite.getPrenom_client());
+                        dateVisite.setText("Date : " + visite.getDate_visite());
+                        heureVisite.setText("Heure : " + visite.getHeure());
+                        adresseVisite.setText("Adresse : " + visite.getAdresse());
+
+                        int visiteid = visite.getID_Visite();
+
+                        LinearLayout buttonsLayout = visiteView.findViewById(R.id.buttonsLayout);
+
+                        if (visiteid > 0) {
+                            Button btnSupprimer = new Button(Visites.this);
+                            btnSupprimer.setText("Supprimer");
+                            // Store the ID as an object, not as a resource ID
+                            btnSupprimer.setTag(Integer.valueOf(visiteid));
+                            btnSupprimer.setOnClickListener(v -> {
+                                // Safely cast the tag to Integer
+                                Integer visiteIdObj = (Integer) v.getTag();
+                                if (visiteIdObj != null) {
+                                    SupprimerVisite(visiteIdObj.intValue());
+                                }
+                            });
+
+                            buttonsLayout.addView(btnSupprimer);
+                        } else {
+                            Log.e("Visites", "ID de visite invalide : " + visiteid);
+                        }
+
+                        linearLayoutVisites.addView(visiteView);
                     }
-                } else {
-                    Log.e("API", "La réponse ne contient pas de données.");
                 }
             }
 
@@ -100,98 +127,38 @@ public class Visites extends BaseActivity {
         });
     }
 
-    // Méthode pour créer un LinearLayout dynamique avec les informations de la visite
-    private LinearLayout createVisiteLayout(Visite visite) {
-        // Créer le LinearLayout principal pour chaque visite
-        LinearLayout visiteLayout = new LinearLayout(this);
-        visiteLayout.setOrientation(LinearLayout.HORIZONTAL);
-        visiteLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        visiteLayout.setPadding(16, 16, 16, 16);
+    private void SupprimerVisite(int idVisite) {
+        Toast.makeText(this, "Suppression de la visite ID : " + String.valueOf(idVisite), Toast.LENGTH_SHORT).show();
 
-        // Créer l'image de profil (ImageView)
-        ImageView imageProfil = new ImageView(this);
-        imageProfil.setLayoutParams(new LinearLayout.LayoutParams(64, 64));
-        imageProfil.setImageResource(R.drawable.user); // Par défaut, une image de profil (à personnaliser)
-        imageProfil.setBackgroundResource(R.drawable.circle_background);
-        imageProfil.setClipToOutline(true);
-        imageProfil.setScaleType(ImageView.ScaleType.CENTER_CROP);
+        // Créer Retrofit
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8000/api/")  // Assure-toi que l'URL est correcte
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        // Créer le LinearLayout pour les infos de la visite
-        LinearLayout infosVisite = new LinearLayout(this);
-        infosVisite.setOrientation(LinearLayout.VERTICAL);
-        infosVisite.setLayoutParams(new LinearLayout.LayoutParams(
-                0, LinearLayout.LayoutParams.WRAP_CONTENT, 1)); // Prend tout l'espace restant
+        ApiService apiService = retrofit.create(ApiService.class);
 
-        // Nom du client
-        TextView nomClient = new TextView(this);
-        nomClient.setText(visite.getNom_client());
-        nomClient.setTextSize(16);
-        nomClient.setTextColor(getResources().getColor(android.R.color.black));
-        nomClient.setTypeface(null, Typeface.BOLD);
+        // Requête DELETE pour supprimer la visite
+        Call<Void> call = apiService.deleteVisiteById(idVisite);
 
-        // Prénom du client
-        TextView prenomClient = new TextView(this);
-        prenomClient.setText(visite.getPrenom_client());
-        prenomClient.setTextSize(14);
-        prenomClient.setTextColor(getResources().getColor(android.R.color.darker_gray));
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (!response.isSuccessful()) {
+                    Log.e("API", "Code HTTP: " + response.code());
+                    return;
+                }
 
-        // Date de la visite
-        TextView dateVisite = new TextView(this);
-        dateVisite.setText("Date: " + visite.getDate_visite());
-        dateVisite.setTextSize(14);
-        dateVisite.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                // Mise à jour de l'interface utilisateur : on pourrait supprimer la visite de la liste affichée
+                Toast.makeText(Visites.this, "Visite supprimée avec succès", Toast.LENGTH_SHORT).show();
 
-        // Heure de la visite
-        TextView heureVisite = new TextView(this);
-        heureVisite.setText("Heure: " + visite.getHeure());
-        heureVisite.setTextSize(14);
-        heureVisite.setTextColor(getResources().getColor(android.R.color.darker_gray));
+                fetchVisites(idAgent);
+            }
 
-        // Adresse de la visite (si disponible)
-        TextView adresseVisite = new TextView(this);
-        adresseVisite.setText("Adresse: " + visite.getAdresse());
-        adresseVisite.setTextSize(14);
-        adresseVisite.setTextColor(getResources().getColor(android.R.color.darker_gray));
-        adresseVisite.setVisibility(View.VISIBLE); // Cachée par défaut
-
-        // Ajouter les TextViews dans le LinearLayout infosVisite
-        infosVisite.addView(nomClient);
-        infosVisite.addView(prenomClient);
-        infosVisite.addView(dateVisite);
-        infosVisite.addView(heureVisite);
-        infosVisite.addView(adresseVisite);
-
-        // Créer un LinearLayout pour les boutons
-        LinearLayout buttonsLayout = new LinearLayout(this);
-        buttonsLayout.setOrientation(LinearLayout.HORIZONTAL);
-        buttonsLayout.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        buttonsLayout.setPadding(0, 8, 0, 0);
-
-        // Bouton Modifier
-        Button btnModifier = new Button(this);
-        btnModifier.setText("Modifier");
-        btnModifier.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        buttonsLayout.addView(btnModifier);
-
-        // Bouton Supprimer
-        Button btnSupprimer = new Button(this);
-        btnSupprimer.setText("Supprimer");
-        btnSupprimer.setLayoutParams(new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        buttonsLayout.addView(btnSupprimer);
-
-        // Ajouter le LinearLayout des boutons dans le layout principal
-        infosVisite.addView(buttonsLayout);
-
-        // Ajouter l'ImageView et le LinearLayout des infos dans le layout principal
-        visiteLayout.addView(imageProfil);
-        visiteLayout.addView(infosVisite);
-
-        return visiteLayout;
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Log.e("API", "Erreur réseau/API : " + t.getMessage(), t);
+            }
+        });
     }
-
-
 }

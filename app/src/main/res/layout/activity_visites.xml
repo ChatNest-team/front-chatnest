@@ -52,13 +52,89 @@
             app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
-                android:id="@+id/linearLayoutVisites"
+                android:id="@+id/visiteLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
-                <!-- Contenu des visites ici -->
+                android:padding="16dp"
+                android:background="#FFFFFF">
+
+                <!-- Image de profil -->
+                <ImageView
+                    android:id="@+id/imageProfil"
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:src="@drawable/user"
+                    android:background="@drawable/circle_background"
+                    android:scaleType="centerCrop"
+                    android:clipToOutline="true" />
+
+                <!-- Infos visite -->
+                <LinearLayout
+                    android:id="@+id/infosVisite"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:layout_marginStart="12dp">
+
+                    <TextView
+                        android:id="@+id/nomClient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nom Client"
+                        android:textStyle="bold"
+                        android:textSize="16sp"
+                        android:textColor="@android:color/black" />
+
+                    <TextView
+                        android:id="@+id/prenomClient"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Prénom Client"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/dateVisite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Date: 01/01/2025"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/heureVisite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Heure: 14:00"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray" />
+
+                    <TextView
+                        android:id="@+id/adresseVisite"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Adresse: 123 rue Exemple"
+                        android:textSize="14sp"
+                        android:textColor="@android:color/darker_gray"
+                        android:visibility="visible" />
+
+                    <!-- Boutons -->
+                    <LinearLayout
+                        android:id="@+id/buttonsLayout"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:paddingTop="8dp">
+
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
             </LinearLayout>
+
 
         </androidx.cardview.widget.CardView>
 
