@@ -50,9 +50,9 @@ public class Messagelist extends BaseActivity {
         });
         SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
         linearLayoutConversation = findViewById(R.id.linearLayoutConversation);
+        getSupportActionBar().hide();
 
-
-
+        setupBottomNavigation(R.id.nav_messages);
 
         Intent intent = getIntent();
         int idPersonne = intent.getIntExtra("idPersonne", -1);

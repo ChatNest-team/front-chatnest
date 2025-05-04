@@ -1,6 +1,8 @@
 package com.example.chatnest;
 
 import android.content.Intent;
+import androidx.appcompat.widget.Toolbar;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -15,6 +17,7 @@ import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,10 +36,13 @@ public class Messagerie extends BaseActivity {
     private Button send;
     private int idAgent;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_messagerie);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         messageInput = findViewById(R.id.etMessage);
 
@@ -44,7 +50,15 @@ public class Messagerie extends BaseActivity {
         String idAgentStr = getIntent().getStringExtra(EXTRA_ID_AGENT);
         String role = getIntent().getStringExtra("role");
 
+        // En Java
+        getSupportActionBar().hide();
+        TextView retour = findViewById(R.id.idretour);
 
+        retour.setOnClickListener(v -> {
+            Intent intent = new Intent(Messagerie.this, Messagelist.class);
+            startActivity(intent);
+            finish();
+        });
         String idClientStr = getIntent().getStringExtra("idClient");
         int idClient = -1;
 
@@ -231,6 +245,7 @@ public class Messagerie extends BaseActivity {
 
         messageList.addView(errorView);
     }
+
 
 
 

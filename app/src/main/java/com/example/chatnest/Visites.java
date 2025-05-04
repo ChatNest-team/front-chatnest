@@ -37,31 +37,9 @@ public class Visites extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_visites);
 
-        // Initialiser la navigation
-        BottomNavigationView navigationView = findViewById(R.id.bottom_navigation);
+        setupBottomNavigation(R.id.nav_visite);
 
-        navigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.nav_home) {
-                    Toast.makeText(Visites.this, "Accueil", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Visites.this, Home.class);
-                    startActivity(intent);
-                    return true;
-                } else if (item.getItemId() == R.id.nav_profil) {
-                    Toast.makeText(Visites.this, "Profil", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Visites.this, Profil.class);
-                    startActivity(intent);
-                    return true;
-                } else if (item.getItemId() == R.id.nav_messages) {
-                    Toast.makeText(Visites.this, "Messages", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(Visites.this, Messagelist.class);
-                    startActivity(intent);
-                    return true;
-                }
-                return false;
-            }
-        });
+        getSupportActionBar().hide();
 
         linearLayoutVisites = findViewById(R.id.linearLayoutVisites);
 

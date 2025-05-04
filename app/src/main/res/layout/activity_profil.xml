@@ -5,78 +5,87 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#F4F4F9"
     tools:context=".Profil">
 
-    <!-- Image de profil -->
-    <ImageView
+    <!-- Animation d'accueil avec Lottie -->
+    <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/imgProfil"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/user"
-        android:contentDescription="Photo de profil"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:scaleType="centerCrop"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="176dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/profil" />
 
     <!-- Nom de l'utilisateur -->
     <TextView
         android:id="@+id/tvNom"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
-        android:textSize="20sp"
+        android:text="Jonathan Doe"
+        android:textSize="22sp"
+        android:textColor="#222222"
         android:textStyle="bold"
         android:layout_marginTop="16dp"
         app:layout_constraintTop_toBottomOf="@id/imgProfil"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center" />
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <!-- Date d'inscription -->
     <TextView
         android:id="@+id/tvDateInscription"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Date d'inscription : 01/01/2022"
+        android:text="Inscrit le : 01/01/2022"
         android:textSize="14sp"
-        android:layout_marginTop="8dp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/tvNom"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Numéro de téléphone -->
+    <!-- Email -->
     <TextView
         android:id="@+id/tvEmail"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email : jon@email.com"
+        android:text="jon@email.com"
         android:textSize="14sp"
-        android:layout_marginTop="8dp"
+        android:textColor="#666666"
+        android:layout_marginTop="4dp"
         app:layout_constraintTop_toBottomOf="@id/tvDateInscription"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:gravity="center" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Bouton Se déconnecter -->
+    <!-- Bouton Déconnexion -->
     <Button
         android:id="@+id/btnDeconnecter"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:text="Se déconnecter"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:background="@color/design_default_color_on_primary"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginHorizontal="32dp"
+        android:backgroundTint="@color/blue_500"
         app:layout_constraintTop_toBottomOf="@id/tvEmail"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-
+    <!-- Menu de navigation fixé en bas -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_navigation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:menu="@menu/bottom_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

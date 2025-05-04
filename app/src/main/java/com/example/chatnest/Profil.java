@@ -44,7 +44,7 @@ public class Profil extends BaseActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
+        getSupportActionBar().hide();
         // Initialiser les vues
         nom = findViewById(R.id.tvNom);
         date_inscription = findViewById(R.id.tvDateInscription);
@@ -64,6 +64,8 @@ public class Profil extends BaseActivity {
             logoutIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(logoutIntent);
         });
+
+        setupBottomNavigation(R.id.nav_profil);
 
 
     }

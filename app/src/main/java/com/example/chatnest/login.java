@@ -44,6 +44,8 @@ public class login extends AppCompatActivity {
             startActivity(intent);
         });
 
+        getSupportActionBar().hide();
+
         validateButton.setOnClickListener(v -> {
             String code = accessCodeInput.getText().toString().trim();
             Log.d("Login", "Code saisi: " + code);  // Log le code saisi

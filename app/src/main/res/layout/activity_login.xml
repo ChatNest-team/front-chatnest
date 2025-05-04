@@ -5,54 +5,109 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login">
+    tools:context=".login"
+    android:background="#F4F4F9">
+
+
+
+    <!-- Champ de texte pour le code d'accès -->
+    <TextView
+        android:id="@+id/helpText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="8dp"
+        android:text="Ce code vous a été transmis par votre agent référent qui s'est occupé de vous lors de votre ouverture de dossier."
+        android:textAlignment="center"
+        android:textColor="#666666"
+        android:textSize="10sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/accessCodeInput" />
+
+    <!-- Titre Client -->
+    <TextView
+        android:id="@+id/titleClient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Client"
+        android:textSize="26sp"
+        android:textColor="@color/blue_500"
+        android:textStyle="bold"
+        android:shadowColor="#6200EE"
+        android:shadowDx="1"
+        android:shadowDy="1"
+        android:shadowRadius="4"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="4sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        android:gravity="center" />
+
+
 
     <EditText
         android:id="@+id/accessCodeInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="50dp"
         android:hint="Entrez le code d'accès"
         android:inputType="textPassword"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@android:color/white"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/titleClient"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
+    <!-- Message d'erreur ou de succès -->
     <TextView
         android:id="@+id/messageText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:text=""
         android:textColor="#FF0000"
-        android:visibility="gone"
-        android:text="Message d’erreur ou de succès ici"
-        app:layout_constraintTop_toBottomOf="@id/accessCodeInput"
+        android:visibility="invisible"
+        android:textAlignment="center"
+        app:layout_constraintTop_toBottomOf="@id/helpText"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Bouton de validation -->
+
+    <!-- Lien pour l'accès agent -->
+    <Button
+        android:id="@+id/validateButton"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_marginTop="48dp"
+        android:backgroundTint="@color/blue_500"
+        android:text="Valider"
+        android:textColor="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/messageText" />
 
     <TextView
         android:id="@+id/hiddenLoginAgent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Accès agent"
-        android:textSize="12sp"
-        android:textColor="#888888"
+        android:textSize="14sp"
+        android:textColor="#6200EE"
         android:clickable="true"
         android:focusable="true"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/validateButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <Button
-        android:id="@+id/validateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Valider"
-        app:layout_constraintTop_toBottomOf="@id/messageText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

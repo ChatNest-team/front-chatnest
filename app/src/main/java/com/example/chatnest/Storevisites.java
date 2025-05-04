@@ -40,6 +40,7 @@ public class Storevisites extends BaseActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_storevisites);
 
+        getSupportActionBar().hide();
         // Initialisation du bouton
         Button btnSubmitVisite = findViewById(R.id.btnSubmitVisite);
 
