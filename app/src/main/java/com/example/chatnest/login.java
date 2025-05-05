@@ -1,6 +1,7 @@
 package com.example.chatnest;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -27,6 +28,8 @@ public class login extends AppCompatActivity {
     private TextView messageText;
     private Button validateButton;
 
+    private TextView loginAgent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +38,13 @@ public class login extends AppCompatActivity {
         accessCodeInput = findViewById(R.id.accessCodeInput);
         messageText = findViewById(R.id.messageText);
         validateButton = findViewById(R.id.validateButton);
+        loginAgent = findViewById(R.id.hiddenLoginAgent);
+        loginAgent.setOnClickListener(v->{
+            Intent intent = new Intent(login.this, LogAgent.class);
+            startActivity(intent);
+        });
+
+        getSupportActionBar().hide();
 
         validateButton.setOnClickListener(v -> {
             String code = accessCodeInput.getText().toString().trim();
@@ -47,7 +57,7 @@ public class login extends AppCompatActivity {
 
                 // Configuration de Retrofit
                 Retrofit retrofit = new Retrofit.Builder()
-                        .baseUrl("http://10.0.2.2/api/") // Ajout du port et s'assurer que l'URL se termine par un slash
+                        .baseUrl("http://10.0.2.2:8000/api/")
                         .addConverterFactory(GsonConverterFactory.create())
                         .build();
 
@@ -70,8 +80,14 @@ public class login extends AppCompatActivity {
                             if (auth.client != null) {
                                 messageText.setText(auth.message + "\nBienvenue ");
                                 messageText.setTextColor(Color.GREEN);
+                                SharedPreferences sharedPreferences = getSharedPreferences("MySession", MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString("id", String.valueOf(auth.client.id));
+                                editor.putString("role", String.valueOf(auth.client.role));
+                                editor.apply();
+                                Log.d("Login", "role : " + auth.client.role);
 
-                                // Créer un Intent pour aller vers l'activité Home
+
                                 Intent intent = new Intent(login.this, Home.class);
                                 startActivity(intent);
                                 finish();

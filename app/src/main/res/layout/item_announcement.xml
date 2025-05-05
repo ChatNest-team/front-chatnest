@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="20dp">
+
+    <LinearLayout
+        android:id="@+id/annoncesContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/round_background"
+        android:padding="15dp"
+        android:layout_marginBottom="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp">
+
+        <!-- Image de l'annonce avec bord arrondi -->
+        <ImageView
+            android:id="@+id/idivPoster"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/house"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/round_background"/>
+
+        <!-- Titre de l'annonce -->
+        <TextView
+            android:id="@+id/idtvTitreAnnonce"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Titre de l'annonce"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:textColor="#333333"
+            android:layout_marginBottom="4dp"/>
+
+        <!-- Prix de l'annonce -->
+        <TextView
+            android:id="@+id/idtvPrix"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prix"
+            android:textColor="#FF6F00"
+            android:textSize="16sp"
+            android:layout_marginBottom="4dp" />
+
+        <!-- Adresse de l'annonce -->
+        <TextView
+            android:id="@+id/idtvAdresse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Adresse"
+            android:textColor="#757575"
+            android:textSize="14sp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Nom de l'agent -->
+        <TextView
+            android:id="@+id/tvNomAgent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ajouté par : Nom de l'agent"
+            android:textStyle="italic"
+            android:textColor="#9E9E9E"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Bouton "Contacter" avec style amélioré -->
+        <Button
+            android:id="@+id/idbtnContacter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contacter"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/bg_send"
+            android:layout_marginTop="10dp"
+            android:paddingHorizontal="20dp"
+            android:paddingVertical="10dp"/>
+        <ImageView
+            android:id="@+id/idstorevisite"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="10dp"
+            android:src="@drawable/calendar"
+            android:contentDescription="@string/visite"
+            android:clickable="true"
+            android:focusable="true" />
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

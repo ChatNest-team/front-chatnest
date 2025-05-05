@@ -4,4 +4,7 @@ package com.example.chatnest;
 public class AuthResponse {
     public String message;
     public Client client;
+
 }
+
+
