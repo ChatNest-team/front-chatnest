@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -90,15 +90,17 @@
             </HorizontalScrollView>
 
             <!-- Bouton -->
-            <Button
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmitVisite"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Soumettre"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/round_background"
-                android:layout_marginTop="32dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enregistrer"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/blue_500"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"/>
+
         </LinearLayout>
     </ScrollView>
 

@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ECECEC"
     android:padding="8dp">
 
     <!-- Toolbar avec bouton retour -->
@@ -13,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Retour"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/blue_500"
         android:textStyle="bold"
         android:textSize="18sp"
         android:padding="12dp"
@@ -40,7 +39,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_agent_default"
+            android:src="@drawable/user"
             android:background="@drawable/avatar_background"
             android:padding="4dp" />
 
@@ -106,7 +105,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:padding="8dp"
-            android:background="#EEEEEE"
+            android:background="#FFFF"
             android:gravity="center_vertical">
 
             <EditText

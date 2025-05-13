@@ -1,0 +1,12 @@
+<!-- res/drawable/splash_background.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Fond uni -->
+    <item android:drawable="@color/white" />
+
+    <!-- Image centrée -->
+    <item>
+        <bitmap
+            android:gravity="center"
+            android:src="@drawable/ic_" />
+    </item>
+</layer-list>

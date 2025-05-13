@@ -99,7 +99,7 @@
             android:layout_height="wrap_content"
             android:text="Accès client"
             android:textSize="14sp"
-            android:textColor="#6200EE"
+            android:textColor="@color/blue_500"
             android:textAlignment="center"
             android:layout_marginTop="16dp"
             android:clickable="true"

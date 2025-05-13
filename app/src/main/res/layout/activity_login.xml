@@ -5,7 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F4F4F9"
     tools:context=".login">
 
     <!-- Titre principal -->
@@ -106,7 +105,7 @@
         android:layout_height="wrap_content"
         android:text="Accès agent"
         android:textSize="14sp"
-        android:textColor="#6200EE"
+        android:textColor="@color/blue_500"
         android:clickable="true"
         android:focusable="true"
         android:layout_marginTop="16dp"

@@ -4,14 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    >
 
     <TextView
         android:id="@+id/idretourupdate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Retour"
-        android:textColor="@color/purple_500"
+        android:textColor="@color/blue_500"
         android:textStyle="bold"
         android:textSize="18sp"
         android:padding="12dp"
@@ -85,15 +85,17 @@
 
 
             <!-- Bouton -->
-            <Button
+
+            <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnSubmitVisiteUpdate"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Modifier"
-                android:textAllCaps="false"
-                android:textColor="#FFFFFF"
-                android:background="@drawable/round_background"
-                android:layout_marginTop="32dp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enregistrer"
+                android:textColor="@color/white"
+                app:backgroundTint="@color/blue_500"
+                android:layout_marginTop="10dp"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp"/>
         </LinearLayout>
     </ScrollView>
 
